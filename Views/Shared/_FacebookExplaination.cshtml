@@ -1,0 +1,28 @@
+﻿  @*@Html.Action("ExternalInvitation", new {id = ViewContext.RouteData.Values["id"], Text = "or invite via email:", Label = "Invite Facebook friend" })*@
+
+<div style="width:353px">
+    <p>You can invite as many Facebook friends as you like by sending them a private message, explaining why would you like them to join SupportFriend, for instance: "Hey, let's join the safe drivers family and cut our insurance costs!"</p>
+
+    <input type="button" id="invite-btn" value="OK" />
+</div>
+
+<script type="text/javascript">        
+        $("#invite-btn").click(function (e) {
+            e.preventDefault();
+            $('#NeoPopupHolder').dialog('close')
+            FB.getLoginStatus(function (response) {
+                // Check login status on load, and if the user is
+                // already logged in, go directly to the welcome message.
+                if (response.status == 'connected') {
+                    openFbSendDialog();
+                }
+                else {
+                    FB.login(function (response) {
+                        if (response.status == 'connected') {
+                            openFbSendDialog();
+                        }
+                    }, { scope: 'user_friends, email' });
+                }
+            });
+        });
+</script>

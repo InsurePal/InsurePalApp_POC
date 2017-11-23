@@ -1,0 +1,362 @@
+﻿@model SupportFriends.Models.DAL.BetData
+@{
+    ViewBag.Title = "Invited";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+<div class="bet-container">
+
+    @section Header {
+        @*<div class="subheader">
+                <div class="badge-border">
+                    <div class="badge-inner">
+                        <img class="img2" src="~/Content/_images/getsupp-ico-white.png" />
+                    </div>
+                </div>
+            </div>*@
+
+    }
+
+@if (ViewBag.ActionTypeID == 114)
+{
+    <h1 class="small" style="font-size: 30px !important;">Your friend @Model.Username thinks you are a safe driver</h1>
+    <p class="description">Accept @(Model.User1.Contains(" ") ? Model.User1.Remove(Model.User1.IndexOf(" ")) : Model.User1)'s endorsement and get $@Convert.ToInt32(Model.Voucher1Value) off your car insurance..</p>
+    
+}
+else
+{
+    <h1 class="small" style="font-size: 30px !important;">Would you endorse @Model.User1 a safe driver?</h1>
+    <p class="description">Endorse @(Model.User1.Contains(" ") ? Model.User1.Remove(Model.User1.IndexOf(" ")) : Model.User1) with your guarantee and save $@Convert.ToInt32(Model.Voucher1Value) on your auto insurance. </p>
+}
+    
+
+
+
+        <div id="betForm" class="invited">
+            <div class="formItem" style="min-height:109px;">
+                <div class="heading">
+                    <div class="noCircle">1</div>
+                    
+                        @if (ViewBag.ActionTypeID == 114)
+                        {
+                            <span>Accept endorsement</span>
+                        }
+                        else
+                        {
+                            <span>
+                                Endorse your friend</span>
+                         }
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                </div>
+                <div class="iloBetPicker">
+                    <div class="items-list">
+                        <div class="ilovoucher item @((Model.BetValue == 650) ? "red" : ((Model.BetValue == 260) ? "violet" :  ((Model.BetValue == 130) ? "blue" : "")))" data-amountID="20">
+                            <div class="left @((ViewBag.ActionTypeID == 115) ? "active selected" : "unselected")">
+                                <div class="holder">
+                                    @((ViewBag.ActionTypeID == 114 ? "Friend's savings" : "Your savings"))<br /><br />
+                                </div>
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>@((ViewBag.ActionTypeID == 114 ? Convert.ToInt32(Model.Voucher2Value) : Convert.ToInt32(Model.Voucher1Value)))</b>
+                                </div>
+                            </div>
+                            <div class="center  @((ViewBag.ActionTypeID == 114) ? "active selected" : "unselected")">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    @((ViewBag.ActionTypeID == 114 ? "Your savings" : "Friend's savings"))<br /><br />
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@DateTime.Now.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>@((ViewBag.ActionTypeID == 114 ? Convert.ToInt32(Model.Voucher1Value) : Convert.ToInt32(Model.Voucher2Value)))</b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>@Convert.ToInt32(Model.BetValue)</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                        </div>
+
+                    </div>
+                    @*<a class="amo-btn"><i class="fa fa-check" aria-hidden="true"></i> Choose</a>*@
+                    @*<i class="fa fa-minus upArrow" aria-hidden="true" title="Give me less"></i>
+                        <i class="fa fa-plus downArrow" aria-hidden="true" title="Give me more"></i>*@
+                    @Html.Hidden("hfAmount", "50")
+                </div>
+
+
+                <div class="valueBadge green"><span>VOUCHER</span><br /><b>50</b> €<br /><span>VALUE</span></div>
+                <div class="valueBadge  @((Model.BetValue == 650) ? "red" : ((Model.BetValue == 260) ? "violet" :  ((Model.BetValue == 130) ? "blue" : "green"))) active"><span>VOUCHER</span><br /><b>@(Convert.ToInt32(Model.Voucher1Value) + Convert.ToInt32(Model.Voucher2Value))</b> $<br /><span>VALUE</span></div>
+
+                <div class="info">
+                    <div class="infodot1"></div><div class="infodot2 @((ViewBag.ActionTypeID == 115) ? "alt" : "")"></div><div class="infodot3"></div>
+
+                    @if (ViewBag.ActionTypeID == 115)
+                    {
+                        <div class="info1">For you</div>
+                        <div class="info2 alt">For your friend</div>
+                        @*<div class="info3">You will be asked to guarantee your friend is a safe driver with the chosen amount. There are no costs for you or your friend(s), unless they make damage claims this year.</div>*@
+                        <div class="info3">You are endorsing your friend who will save $<span id="price1">@(Convert.ToInt32(Model.Voucher2Value))</span> on their auto insurance. You will save $<span id="price2">@(Convert.ToInt32(Model.Voucher1Value))</span> on your auto insurance. If your friend files a claim on this policy, you and your friend will lose your savings plus $<span id="price3">@(Convert.ToInt32(Model.BetValue) - Convert.ToInt32(Model.Voucher1Value) - Convert.ToInt32(Model.Voucher2Value)  )</span>. Total amount of guarantee is $<span id="price4">@(Convert.ToInt32(Model.BetValue))</span>.</div>
+
+                    }
+                    else
+                    {
+                        <div class="info1">For your friend</div>
+                        <div class="info2">For you</div>
+                        @*<div class="info3">Your friend will be asked to guarantee you are a safe driver with the chosen amount. There are no costs for you or your friend(s), unless you make damage claims this year.</div>*@
+                        <div class="info3">You are being endorsed by your friend and you will save $<span id="price1">@(Convert.ToInt32(Model.Voucher1Value))</span> on your auto insurance. Your friend will save $<span id="price2">@(Convert.ToInt32(Model.Voucher2Value))</span> on his/her auto insurance. If you file a claim on this policy, you and your friend will lose your savings plus $<span id="price3">@(Convert.ToInt32(Model.BetValue) - Convert.ToInt32(Model.Voucher1Value) - Convert.ToInt32(Model.Voucher2Value)  )</span>. Total amount of guarantee is $<span id="price4">@(Convert.ToInt32(Model.BetValue))</span>.</div>
+                    }
+                </div>
+                <div class="info4">Guarantee</div>
+                <div style="margin: 0 auto; width: 210px;">
+                    @*<a class="button chooseAmount" style="background: none; display: inline-block; color: #8e9ca5">Decline</a>*@
+
+
+
+                    @Html.ActionLink("Decline", "Respond", "Home", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], accept = false }, new { @class = "button chooseAmount", title = "Reject this offer", style= "background: none; display: inline-block; color: #8e9ca5" })
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink((ViewBag.ActionTypeID == 114 ? "Accept" : "Endorse"), "Respond", "Home", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], accept = true }, new { @class = "button chooseAmount", title = "Accept this offer", style = "display: inline-block;" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink((ViewBag.ActionTypeID == 114 ? "Accept" : "Endorse"), "LoginPopup", "Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], accept = true }, new { @class = "NeoPopupOpen button chooseAmount", @title = "Accept this offer", style = "display: inline-block;" })
+                    }
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+</div>
+@section MetaData {
+    <meta property="og:url" content="@Request.Url.ToString()" />
+    <meta property="og:type" content="website" />
+    @*<meta property="og:description" content="Get up to $500 discount on your can insurance, now! Join SupportFriend, the social insurance provider." />*@
+    <meta property="og:image" content="http://@Request.Url.ToString().Replace("http://", "").Remove(Request.Url.ToString().Replace("http://", "").IndexOf("/"))@Url.Content("~/Content/_images/insurepal-C.gif")" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+
+    @if (ViewBag.ActionTypeID == 115)
+    {
+        <meta property="og:title" content="Let's save on our auto insurance together." />
+        <meta property="og:description" content="I am asking you to endorse me as a safe driver. Together we will save $@(ViewBag.TotalVouchers)." />
+        
+    }
+    else
+    {
+        <meta property="og:title" content="Let's save on our auto insurance together." />
+        <meta property="og:description" content="I want to endorse you as a safe driver. Together we will save $@(ViewBag.TotalVouchers)." />
+
+
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        var timeFBhelp = null;
+        var firstFBhelp = false;
+       
+
+
+
+        function openFbSendDialog () {
+
+            var formData = new FormData();
+            formData.append('amount', $('#hfAmount').val());
+            formData.append('betActionID', '115');
+            formData.append('uplFile', $('input[type=file]')[0].files[0]);
+            data:  formData
+
+            $.ajax({
+                type: "POST",
+                url: "/Bet/FacebookMessage",
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                data: formData,
+                success: function (data) {
+                    //console.log(data.host);
+                    //console.log(data.guid);
+                    var inviteUrl = data.host + 'Home/Invited/' + data.guid + '/' + data.action;
+                    console.log(inviteUrl);
+                    FB.ui({
+                        method: 'send',
+                        link: inviteUrl
+                    },
+                        function (response) {
+                            $("#fb-help").remove();
+                            $("#fb-help-bottom").remove();
+
+                            if (response && response.success) {
+                                console.log(response);
+                                $("#removeFB .fields").hide();
+                                $("#removeFB p").html("Your invitation has been sent. Invite more freinds or click Continue.<br /><br />Invite 3 or more friends to join and get another <b>5 € extra</b>!");
+                                $("#removeFB .fields.center").show();
+                                $(".createAccBtn").hide();
+                                $(".continueBtn").show();
+                            } else {
+                                console.log('canceled');
+                            }
+                        }
+                    );
+                    if(timeFBhelp) { clearTimeout(timeFBhelp); }
+                    timeFBhelp = setTimeout(function(){openFBhelp();}, 500);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+
+        function openFBhelp(){
+            var position = $(".fb_dialog").position();
+
+            //fix
+            if(firstFBhelp) {
+                var dialogs = $(".fb_dialog");
+                var dialog = dialogs[dialogs.length-1];
+                position = $(dialog).position();
+            }
+
+            if(position.left > 0 && position.top > -10000) {
+                if(timeFBhelp) { clearTimeout(timeFBhelp); }
+                $("#fb-help").remove();
+                $("#fb-help-bottom").remove();
+                //$("body").append("<div id='fb-help'><p>You can invite as many Facebook friends as you like by sending them a private message, like: \"Hey, let's join the safe drivers family and cut our insurance costs!\"</p></div>");
+                $("body").append("<div id='fb-help'><p>You can invite as many Facebook friends as you like by sending them a private message.</div>");
+                $("body").append("<div id='fb-help-bottom'><p>Private message, like: \"Hey, let's join the safe drivers family and cut our insurance costs!\"</p></div>")
+
+                if(!firstFBhelp) {
+                    position = $(".fb_dialog").position();
+                }
+
+                var fbDialogleft = position.left + $(".fb_dialog").width() - 50;
+
+                $("#fb-help").css("left", fbDialogleft);
+                $("#fb-help").css("top", position.top - 65);
+
+                $("#fb-help-bottom").css("left", fbDialogleft);
+                $("#fb-help-bottom").css("top", position.top + 98);
+
+                firstFBhelp = true;
+            }
+            else {
+                if(timeFBhelp) { clearTimeout(timeFBhelp); }
+                console.log('timeFBhelp: ', timeFBhelp);
+                timeFBhelp = setTimeout(function(){openFBhelp();}, 500);
+            }
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: @System.Configuration.ConfigurationManager.AppSettings["FBconsumerKey"].ToString(),
+                xfbml: true,
+                version: 'v2.6'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        $("#invite-btn").click(function (e) {
+            e.preventDefault();
+            FB.getLoginStatus(function (response) {
+                // Check login status on load, and if the user is
+                // already logged in, go directly to the welcome message.
+                if (response.status == 'connected') {
+                    openFbSendDialog();
+                }
+                else {
+                    FB.login(function (response) {
+                        if (response.status == 'connected') {
+                            openFbSendDialog();
+                        }
+                    }, { scope: 'user_friends, email' });
+                }
+            });
+        });
+
+        var m = (window.innerWidth <= 461);
+        if (m) {
+            shuffle();
+        }
+
+        function shuffle() {
+            $(".center.unselected").unbind("click");
+            $(".left.unselected").unbind("click");
+
+            $(".center.unselected").click(function () {
+                $(this).parent().find(".left.selected").addClass("unselected");
+                $(this).parent().find(".left.selected").removeClass("selected");
+                $(this).parent().find(".center.unselected").addClass("selected");
+                $(this).parent().find(".center.unselected").removeClass("unselected");
+                //$(".infodot2").removeClass("alt");
+                //$(".info2").removeClass("alt");
+    
+                shuffle();
+            });
+            $(".left.unselected").click(function () {
+                $(this).parent().find(".left.unselected").addClass("selected");
+                $(this).parent().find(".left.unselected").removeClass("unselected");
+                $(this).parent().find(".center.selected").addClass("unselected");
+                $(this).parent().find(".center.selected").removeClass("selected");
+                //$(".infodot2").addClass("alt");
+                //$(".info2").addClass("alt");
+
+                shuffle();
+            });
+            //$(".center").click(function () {
+            //    $(".info1").show();
+            //    $(".info2").show();
+            //    $(".info4").show();
+            //    $(".info3").hide();
+            //});
+            //$(".left").click(function () {
+            //    $(".info1").show();
+            //    $(".info2").show();
+            //    $(".info4").show();
+            //    $(".info3").hide();
+            //});
+
+            //$(".right").click(function () {
+
+            //    $(".info1").hide();
+            //    $(".info2").hide();
+            //    $(".info4").hide();
+            //    $(".info3").show();
+ 
+            //});
+        }
+    </script>
+}
+
+
+
+

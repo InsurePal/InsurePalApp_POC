@@ -1,0 +1,217 @@
+﻿@model SupportFriends.Models.DAL.BetData
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+@section Header {
+
+<div class="home-header">
+    
+
+    @if(ViewBag.Invitation){
+    @*<h1 class="invited">Up to <b>80%</b> discount on your car insurance</h1>*@
+        <h1>We reward your <b>safe driving</b> with <b>low insurance</b> costs</h1>
+    <div class="cover invited">
+        <div class="content-holder">
+            @if (ViewBag.ActionTypeID == 114) {
+                <h2>
+                    YOUR FRIEND GUARANTEES<br />
+                    YOU ARE A SAFE DRIVER
+
+                </h2>
+                <h3>
+                    Accept his guarantee and get a discount<br />
+                    on your car insurance.
+                </h3>
+               
+
+                <table cellspacing="0" cellpadding="0" >
+                    <thead >
+                        <tr>
+                            <th>Friend</th>
+                            <th>Guarantee amount</th>
+                            <th>Your voucher</th>
+                        </tr>
+                    </thead>
+                    @if (Model != null)
+                    {
+                    <tbody>
+                        <tr>
+                            <td>@Model.Username</td>
+                            <td>@Model.BetValue €</td>
+                            <td>@Model.Voucher1Value €</td>
+                        </tr>
+                    </tbody>
+                    }
+                </table>
+            } else {
+                <h2>
+                    YOUR FRIEND WANTS YOU<br />
+                    TO GUARANTEE HE IS A SAFE DRIVER
+                </h2>
+                <h3>
+                    Guarantee for your friend and get a discount<br />
+                    on your car insurance.
+                </h3>
+
+                <table cellspacing="0" cellpadding="0" >
+                    <thead >
+                        <tr>
+                            <th>Friend</th>
+                            <th>Guarantee amount</th>
+                            <th>Your voucher</th>
+                        </tr>
+                    </thead>
+                    @if (Model != null)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@Model.Username</td>
+                                <td>@Model.BetValue €</td>
+                                <td>@Model.Voucher1Value €</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            }
+
+            <div >
+                @Html.ActionLink("REJECT", "Respond", "Home", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], accept = false}, new { @class = "reject-btn", title="Reject this offer" })
+                @*@Html.ActionLink("ACCEPT", "Register", "Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"] }, new { @class = "accept-btn button", title = "Accept this offer" })*@
+                @Html.ActionLink("ACCEPT", "Respond", "Home", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], accept = true}, new { @class = "accept-btn button", title="Accept this offer" })
+            </div>
+        </div>
+    </div>
+    } else {
+        @*<h1>Up to <b>80%</b> discount on your car insurance</h1>*@
+        <h1>We reward your <b>safe driving</b> with <b>low insurance</b> costs</h1>
+        <div class="cover">
+            <a class="box" href="@if (Request.IsAuthenticated) { @Url.Action("Support-Me", "Bet") } else { @Url.Action("Register", "Account") }" title="Register for SupportFriend">
+                <span id="heading">LET'S<br />START!</span>
+                <span id="text">Give and recive safe driver vouchers</span>
+                <span id="link">Sign up <b>>></b></span>
+            </a>
+
+        </div>
+    }
+</div>
+
+}
+
+
+<h2 ><b>WHAT IS</b> SUPPORT <b>FRIEND</b></h2>
+
+<div>
+    <div class="badges" >
+
+        <div class="badge">
+            <div class="bCell">
+                &nbsp;
+            </div>
+            <div class="bCell">
+                <div class="imgBadge">
+                </div>
+            </div>
+            <div class="bCell bHolder">
+                <div class="bText">
+                    <h3>Safe drivers welcome</h3>
+                    <p>Are you a safe driver? Then stop paying for others. Get up to 80% discount on your insurance premium, now!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="separator">
+            <div></div>
+        </div>
+
+        <div class="badge">
+            <div class="bCell bHolder">
+                <div class="bText">
+                    <h3>Little help of your friends</h3>
+                    <p>Ask your social circle to verify you are a reliable operator or vice versa. Each confirmation of a good driver enables massive discounts for both of you.</p>
+                </div>
+            </div>
+            <div class="bCell">
+                <div class="imgBadge badge2" >
+                </div>
+            </div>
+            <div class="bCell">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="separator">
+            <div></div>
+        </div>
+
+        <div class="badge">
+            <div class="bCell">
+                &nbsp;
+            </div>
+            <div class="bCell">
+                <div class="imgBadge badge3" >
+                </div>
+            </div>
+            <div class="bCell bHolder">
+                <div class="bText">
+                    <h3>Reap the benefits</h3>
+                    <p>No claims this year? Perfect. Welcome to the new world, where car insurance costs is balanced with actual driver performance.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div style="clear:both"></div>
+
+        <div style="width:">
+
+        </div>
+
+        @if (ViewBag.Invitation)
+        {
+            <div class="separator">
+                <div></div>
+            </div>
+            <div class="center">
+                
+                @Html.ActionLink("ACCEPT THIS BET", "Register","Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"]}, new { @class = "accept-btn button", title="Accept this offer" })
+            </div>
+        } 
+    </div>
+    @if (!ViewBag.Invitation)
+    {
+    <div class="home-invite">
+        <div>
+            <h3><b>INVITE FRIENDS</b><br /> and get amazing discounts</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut ultrices magna. Maecenas aliquet felis eu euismod bibendum. Etiam efficitur dolor libero, non ultricies quam pellentesque quis. Morbi consectetur ut nisi a faucibus. Nam ac efficitur risus. </p>
+            <a  href="@Url.Action("Register","Account")" class="button"title="Register for SupportFriend" >Invite</a>
+        </div>
+        
+    </div>
+     }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section MetaData {
+    <meta property="og:url" content="@Request.Url.ToString()" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="You can get up to 80% discount on your can insurance, now! Join SupportFriend, the social insurance provider." />
+    <meta property="og:image" content="http://@Request.Url.ToString().Replace("http://", "").Remove(Request.Url.ToString().Replace("http://", "").IndexOf("/"))@Url.Content("~/Content/_images/fb-link-img.jpg")" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+
+    @if (ViewBag.ActionTypeID == 115)
+    {
+        <meta property="og:title" content="Your friend needs your support." />
+    }
+    else
+    {
+        <meta property="og:title" content="Your friend wants to support you." />
+    }
+}

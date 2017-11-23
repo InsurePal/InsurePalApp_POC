@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "FBtest";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <h2>FBtest</h2>
+    <h3 id="fb-welcome"></h3>
+
+    <input type="button" title="Invite" id="invite-btn" value="A" />
+    <input type="button" title="Invite2" id="invite-btn2" value="B" />
+    <input type="button" title="Invite2" id="invite-btn3" value="C" />
+    <input type="button" title="Invite3" id="invite-btn4" value="D" />
+
+    <ul id="friends-list" style="-moz-columns: 3; -webkit-columns: 3; columns: 3;"></ul>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '',
+                xfbml: true,
+                version: 'v2.6'
+            });
+
+            // ADD ADDITIONAL FACEBOOK CODE HERE
+            function onLogin(response) {
+                if (response.status == 'connected') {
+                    FB.api('/me?fields=first_name', function (data) {
+                        var welcomeBlock = document.getElementById('fb-welcome');
+                        welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+                    });
+                }
+            }
+
+            FB.getLoginStatus(function (response) {
+                // Check login status on load, and if the user is
+                // already logged in, go directly to the welcome message.
+                if (response.status == 'connected') {
+                    onLogin(response);
+
+                    $("#invite-btn3").click(function () {
+                        FB.api(
+                            "/me/invitable_friends",
+                            function (response) {
+                                if (response && !response.error) {
+                                    console.log(response);
+                                    displayFriends(response.data);
+
+                                    getNextPage(response.paging.next);
+                                }
+                                else {
+                                    console.log(response.error);
+                                }
+                            }
+                        );
+                    });
+
+                    $("#invite-btn").click(function () {
+                        FB.ui({
+                            method: 'send',
+                            link: 'http://neolab.si/',
+                        });
+                    });
+
+                    $("#invite-btn4").click(function () {
+                        FB.ui({
+                            method: 'share',
+                            href: 'http://neolab.si/',
+                        });
+                    });
+
+                    $("#invite-btn2").click(function () {
+                        //FB.ui({
+                        //    method: 'send',
+                        //    link: 'http://neolab.si/',
+                        //});
+                        FB.ui({
+                            method: 'apprequests',
+                            message: 'Here is a new Requests dialog...'
+                        });
+                    });
+                } else {
+                    // Otherwise, show Login dialog first.
+                    FB.login(function (response) {
+                        onLogin(response);
+                    }, { scope: 'user_friends, email' });
+                }
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function displayFriends(friends) {
+            for (var i = 0; i < friends.length; i++) {
+                $("#friends-list").append("<li>" + friends[i].name + "</li>");
+            }
+        }
+
+        function getNextPage(nextPage) {
+            $.ajax({
+                url: nextPage,
+                success: function (data) { displayFriends(data.data); getNextPage(data.paging.next) },
+                dataType: 'JSON'
+            });
+        }
+    </script>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+</body>
+</html>

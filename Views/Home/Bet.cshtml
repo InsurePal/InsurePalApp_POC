@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Bet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Choose or Invite friends</h2>
+
+<button title="Invite" id="invite-btn" value="A" class="btn btn-primary"><i class="fa fa-facebook-square fa-lg"></i> Invite via FB</button>
+<button title="Invite" id="invite-btn2" value="A" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope-o fa-lg"></i> Invite via email</button>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Invite friends</h4>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="inputEmails">Email addresses</label>
+                <input type="text" class="form-control" id="inputEmails" placeholder="Emails (comma separated)">
+              </div>
+              <div class="form-group">
+                <label for="inputText">Message</label>
+                <textarea class="form-control" id="inputText" placeholder="Message" ></textarea>
+              </div>
+            <img src="../../Images/filler.jpg" alt="" style="text-align:center;" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times fa-lg"></i> Close</button>
+            <button type="button" class="btn btn-primary"><i class="fa fa-envelope-o fa-lg"></i> Send</button>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+<script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '',
+                xfbml: true,
+                version: 'v2.6'
+            });
+
+            // ADD ADDITIONAL FACEBOOK CODE HERE
+            function onLogin(response) {
+                if (response.status == 'connected') {
+                    //FB.api('/me?fields=first_name', function (data) {
+                    //    var welcomeBlock = document.getElementById('fb-welcome');
+                    //    welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+                    //});
+                }
+            }
+
+            FB.getLoginStatus(function (response) {
+                // Check login status on load, and if the user is
+                // already logged in, go directly to the welcome message.
+                if (response.status == 'connected') {
+                    onLogin(response);
+
+                    $("#invite-btn3").click(function () {
+                        FB.api(
+                            "/me/invitable_friends",
+                            function (response) {
+                                if (response && !response.error) {
+                                    console.log(response);
+                                    displayFriends(response.data);
+
+                                    getNextPage(response.paging.next);
+                                }
+                                else {
+                                    console.log(response.error);
+                                }
+                            }
+                        );
+                    });
+
+                    $("#invite-btn").click(function () {
+                        FB.ui({
+                            method: 'send',
+                            link: 'http://neolab.si/',
+                        });
+                    });
+                } else {
+                    // Otherwise, show Login dialog first.
+                    FB.login(function (response) {
+                        onLogin(response);
+                    }, { scope: 'user_friends, email' });
+                }
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>

@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Choose your action";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+<div class="bet-container1">
+    <div>
+        <h1>CHOOSE</h1>
+
+        <div class="bet-picker">
+            
+            <a class="item" href="@Url.Action("Support-Me","Bet")" title="Let your friends vouch for your driving skills">
+                 <span class="heading">GET VOUCHERS</span>
+                <div class="icon icon2"></div>
+                <span class="bet-btn" >
+                    CHOOSE
+                </span>
+            </a>
+            <div class="separator">OR</div>
+            <a class="item" href="@Url.Action("Support-Friends","Bet")" title="Vouch for your friends as safe drivers">
+                <span class="heading">VOUCH FOR OTHERS</span>
+                <div class="icon"></div>
+                <span class="bet-btn" >
+                    CHOOSE
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="bet-container2 clear-fix">
+    <h2>HOW IT WORKS</h2>
+    <div class="hiw-container left">
+       
+         <div>
+            <img class="img2" src="~/Content/_images/getsupp-ico-white.png" />
+            <h3>GET VOUCHERS</h3>
+            <p>Ask your friend to guarantee a certain amount of money you are a safe driver.</p>
+            <p>A friend accepts your request.</p>
+            <p>By entering a credit card or uploading a credit note, makes a guarantee you are safe driver.</p>
+            <p>Both recieve one voucher each. Each voucher lowers your insurance policy price.</p>
+            <p>You can cash in your voucher when making new or renewing insurance policy.</p>
+            <p>Your friend can also cash in his voucher.</p>
+            <p>By driving safely, you keep your insurance costs low.</p>
+        </div>
+    </div>
+    <div class="hiw-container right">
+        <div>
+            <img src="~/Content/_images/friends-ico-white.png" />
+            <h3>VOUCH FOR OTHERS</h3>
+            <p>You ask a friend to guarantee a certain amount he is a safe driver.</p>
+            <p>In case your friend accepts, you enter a credit card or credit note.</p>
+            <p>Both recieve one voucher each. Each voucher lowers your insurance policy price.</p>
+            <p>Your friend can cash in his voucher when making new or renewing insurance policy.</p>
+            <p>You can cash in your voucher as well.</p>
+            <p>By driving safely, your friend keeps your insurance costs low.</p>
+        </div>
+    </div>
+</div>
+
+<div class="bet-container3">
+    <h2>WHERE IS THE CATCH?</h2>
+        <p>
+            When you are a safe driver, you usually overpay your insurance policy. Basically, you are paying more because of those, who are not safe drivers. To be honest, everyone can have an accident, but the frequency varies.
+            But let's say you havent't had an accident for a few years now. There is a great chance you won't have it in near future as well, so why not make a little guarantee and thus lower your insurance costs?
+        </p>
+    <br />
+        <p>
+            For example, you ask your best friend John, to guarantee 120$ that you are a safe driver. He receives 20$ voucher and you get 80$ voucher.
+            You can cash in those vouchers at insurance company and lower your insurance costs for amount on voucher.
+        </p>
+    <br />
+        <p>
+            If you make an accident before policy expiration, insurance company claims 120$ from John's. If you have no accident, like so many years before, no charges whatsoever are made.
+        </p>
+    <br />
+        <p>
+            The story is the same when you guarantee for John. You get 100$, he gets 20$. If nobody has an accident, you both lower your insurance costs for 100$.
+        </p>
+    <br />
+        <p>
+            Sounds fair? Great, let's make some guarantees then!
+        </p>
+</div>
+
+@section Header {
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

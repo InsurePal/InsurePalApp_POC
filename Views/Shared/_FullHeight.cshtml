@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - SupportFriend</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    @RenderSection("MetaData", false)
+
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,400italic,700,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    @*@Styles.Render("~/Content/fabundle")*@
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/sfStyles.css" rel="stylesheet" />
+</head>
+<body class="full">
+    <div id="body" class="container">
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,487 @@
+﻿@using SupportFriends.Models.DAL
+@using Neolab.Common
+@model List<BetData>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+<div class="dashboardMenu">
+    <div style="display: none;">
+        @Html.Raw(ViewBag.FriendsList)
+    </div>
+    <div style="float:right">
+        <div style="@(ViewBag.TotalValue.ToString() == "0" ? "display: none" : "")">
+            <div class="light">I'M SAVING</div>
+            <div class="hard">
+                @ViewBag.TotalValue.ToString() $
+            </div>
+            <div class="light">WITH INSUREPAL</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="dashboard">
+     @*@Html.Partial("_DashboardMenuPartial")*@
+    <div class="window">
+        <div class="column">
+            <div class="title">
+                Friends who endorse me
+                <a class="button" href="@Url.Action("Support-Me","Bet")">Get endorsed</a>
+            </div>
+            @foreach (BetData b in Model)
+            {
+                using (Html.BeginForm(new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID }))
+                {
+                    if (!b.IsSupporter)
+                    {
+                        <div class="ilovoucher @((b.BetValue == 650) ? "red" : ((b.BetValue == 260) ? "violet" :  ((b.BetValue == 140) ? "blue" : "")))">
+                            <div class="left inactive unselected">
+                                <div class="holder">
+                                    Endorser<br />
+                                    <b>@(b.User2ID == 0 ? "Facebook friends" : b.User2)</b>
+                                </div>
+                                <div class="voucherInfo" style="visibility: hidden;">
+                                    <b>VOUCHER</b><br />
+                                    No. @(b.User2ID == 0 ? "/" : b.Voucher1Code)
+                                </div>
+                                <div class="value">
+                                   $<b>@Convert.ToInt16(b.Voucher1Value)</b>
+                                </div>
+                            </div>
+                            <div class="center active selected">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    Safe driver<br />
+                                    <b>@(b.User1ID == 0 ? "Facebook friends" : b.User1)</b>
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@b.InsertDate.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo" >
+                                    <b>VOUCHER</b><br />
+                                    No. @(b.User2ID == 0 ? "/" : b.Voucher1Code)
+                                </div>
+                                <div class="value">
+                                    $<b>@Convert.ToInt16(b.Voucher2Value)</b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>@Convert.ToInt16(b.BetValue)</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                            @*<div class="borderTop"></div>
+                            <div class="borderBottom"></div>
+                            <div class="borderRight"></div>*@
+                        </div>
+
+                        <div class="ilosteps">
+                            <div title="Invitation send" class="step @(b.BetPhaseID == 0 ? "active" : "" ) tooltip">1</div>
+                            <div class="link @(b.BetPhaseID >= 1 ? "active" : "" )"></div>
+                            <div title="Invitation accepted" class="step @(b.BetPhaseID == 1 ? "active" : "" ) tooltip">2</div>
+                            <div class="link @(b.BetPhaseID >= 2 ? "active" : "" )"></div>
+                            <div title="Guarantee paid" class="step @(b.BetPhaseID == 2 ? "active" : "" ) tooltip">3</div>
+                            <div class="link @(b.BetPhaseID >= 3 ? "active" : "" )"></div>
+                            <div title="Vouchers active" class="step @(b.BetPhaseID == 3 ? "active" : "" ) tooltip">@(b.BetPhaseID == 3 ? "✓" : "4")</div>
+                            <div class="link @(b.BetPhaseID >= 4 ? "complete" : "" )"></div>
+                            <div title="Vouchers active" class="step @(b.BetPhaseID == 4 ? "complete" : "" ) tooltip">@(b.BetPhaseID == 4 ? "✓" : "5")</div>
+                        </div>
+
+
+                        if (b.EventsLog != null)
+                        {
+                            <div class="ilohistory">
+                                @{ int PreviousActivityID = -1;}
+                                @foreach (EventData e in b.EventsLog)
+                                {
+                                    if (e.ActivityID != PreviousActivityID)
+                                    {
+                                        if (PreviousActivityID != -1)
+                                        {
+                                            @Html.Raw("</div>");
+                                        }
+
+                                        @Html.Raw("<div>");
+                                    }
+
+                                    PreviousActivityID = e.ActivityID;
+                                    <div>
+                                        @(e.UserID == WebSecurity.GetUserId(User.Identity.Name) ? "You" : (e.User == "No data" ? "Your friend" : e.User) ) @e.ActivityDescription.<br />-<br />
+                                        <div class="timestamp">@e.InsertDate.ToFuzzyDate() / @e.InsertDate.ToShortTimeString()</div>
+                                    </div>
+                                }
+                                @Html.Raw("</div>")
+
+                                @if (b.NextActivityID != 203)
+                                {
+                                    if ((b.NextActivityID == 201) && b.BetPhaseID != 4)
+                                    {
+                                        <div class="red">
+                                            <div>
+                                                @*<input type="submit" class="btn" disabled="@(b.NextActivityID == 205 || b.NextActivityID == 201 || b.NextActivityID == 204)" value="@b.NextActivity" />*@
+
+                                                @if (b.NextActivityID == 201 && b.BetPhaseID == 1)
+                                                {
+                                                    <span>Waiting for @((b.User2ID == 0) ? "your friend" : b.User2) to respond. <br /><br />Call or message your friend to speed up the process.</span>
+                                                }
+                                                else if (b.NextActivityID == 201 && b.BetPhaseID == 2)
+                                                {
+                                                <span>Waiting for @((b.User2ID == 0) ? "your friend" : b.User2) to make the endorsement. <br /><br />Call or message your friend to speed up the process.</span>
+                                                }
+                                                else if (b.NextActivityID == 205)
+                                                {
+                                                    <span>Waiting for @((b.User2ID == 0) ? "your friend" : b.User2) to make cash-in the voucher. <br /><br />Call or message your friend to speed up the process.</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (b.NextActivityID == 202)
+                                    {  <div>
+                                    <input type="submit" class="button" style="margin-top: 15px;" value="Respond" title="Respond to this voucher" />
+                                </div>
+                                    }
+                                    if (b.NextActivityID == 204)
+                                    {
+                                        <div>
+                                            <a type="submit" class="button" value="Claim voucher" title="Voucher can be claimed with your insurance">Cash-in voucher</a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div>@Html.ActionLink(b.NextActivity, "EnterCreditInfo", new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID, BetValue = b.BetValue }, new { @class = "NeoPopupOpen button vaction typeCredit" + b.BetID, @title = "Enter credit card information" })</div>
+                                }
+                            </div>
+
+
+                                                }
+                                            }
+                                        }
+                                    }
+        </div>
+        <div class="column right">
+            <div class="title">
+                Friends I endorse
+                <a class="button"  href="@Url.Action("Support-Friends","Bet")">Endorse others</a>
+            </div>
+            @foreach (BetData b in Model)
+            {
+                using (Html.BeginForm(new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID }))
+                {
+                    if (b.IsSupporter)
+                    {
+                        <div class="ilovoucher @((b.BetValue == 650) ? "red" : ((b.BetValue == 260) ? "violet" :  ((b.BetValue == 130) ? "blue" : "")))">
+                            <div class="left active selected">
+                                <div class="holder">
+                                    Endorser<br />
+                                    <b>@b.User1</b>
+                                </div>
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. @(b.User2ID == 0 ? "/" : b.Voucher1Code)
+                                </div>
+                                <div class="value">
+                                    $<b>@Convert.ToInt16(b.Voucher1Value)</b>
+                                </div>
+                            </div>
+                            <div class="center inactive unselected">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    Safe driver<br />
+                                    <b>@((b.User2ID == 0) ? "Facebook friend" : b.User2)</b>
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@b.InsertDate.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo" style="visibility: hidden;">
+                                    <b>VOUCHER</b><br />
+                                    No. @(b.User2ID == 0 ? "/" : b.Voucher1Code)
+                                </div>
+                                <div class="value">
+                                   $<b>@Convert.ToInt16(b.Voucher2Value) </b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>@Convert.ToInt16(b.BetValue)</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                            @*<div class="borderTop"></div>
+                            <div class="borderBottom"></div>
+                            <div class="borderRight"></div>*@
+                        </div>
+
+                        <div class="ilosteps">
+                            <div title="Invitation send" class="step @(b.BetPhaseID == 0 ? "active" : "" ) tooltip">1</div>
+
+                            <div class="link @(b.BetPhaseID >= 1 ? "active" : "" )"></div>
+                            <div title="Invitation accepted" class="step @(b.BetPhaseID == 1 ? "active" : "" ) tooltip">2</div>
+                            <div class="link @(b.BetPhaseID >= 2 ? "active" : "" )"></div>
+                            <div title="Guarantee paid" class="step @(b.BetPhaseID == 2 ? "active" : "" ) tooltip">@(b.BetPhaseID == 2 ? "✓" : "3")</div>
+                            <div class="link @(b.BetPhaseID >= 3 ? "active" : "" )"></div>
+                            <div title="Vouchers active" class="step @((b.BetPhaseID == 3 || (b.BetPhaseID == 4 && b.NextActivityID == 204)) ? "active" : "" ) tooltip">@(b.BetPhaseID == 4 && b.NextActivityID == 204 ? "✓" : "4")</div>
+                            <div class="link @(b.BetPhaseID >= 4 ? "active" : "" )"></div>
+                            <div title="Vouchers active" class="step @(b.BetPhaseID == 4 && b.NextActivityID != 204 ? "complete" : "" ) tooltip">@(b.BetPhaseID == 4 && b.NextActivityID != 204 ? "✓" : "5")</div>
+                        </div>
+
+
+                        if (b.EventsLog != null)
+                        {
+
+                            <div class="ilohistory">
+                                @*<div>Bla bla<br /><span class="light">-<br />6.6.2016</span></div>
+                                <div>Bla bla<br /><span class="light">-<br />6.6.2016</span></div>
+                                <div>Bla bla<br /><span class="light">-<br />6.6.2016</span></div>
+                                <div>
+                                    <a class="btn">Claim</a>
+                                </div>
+                                    *@
+                                @{ int PreviousActivityID = -1;}
+
+                                @foreach (EventData e in b.EventsLog)
+                                {
+
+                                    if (e.ActivityID != PreviousActivityID)
+                                    {
+                                        if (PreviousActivityID != -1)
+                                        {
+                                            @Html.Raw("</div>");
+                                        }
+
+                                        @Html.Raw("<div>");
+                                    }
+
+                                    PreviousActivityID = e.ActivityID;
+                                    <div>
+                                        @(e.UserID == WebSecurity.GetUserId(User.Identity.Name) ? "You" : (e.User == "No data" ? "Your friend" : e.User) ) @e.ActivityDescription.<br />-<br />
+                                        <div class="timestamp">@e.InsertDate.ToFuzzyDate() / @e.InsertDate.ToShortTimeString()</div>
+                                        @if (b.NextActivityID == 204 && e.ActivityID == 204)
+                                        {
+                                            <a href="#" class="button" style="margin-top: 15px;"  title="Voucher can be claimed with your insurance" >Cash-in voucher</a>
+                                        }
+                                    </div>
+
+                               }
+                               @Html.Raw("</div>")
+
+                                 @if (b.NextActivityID != 203)
+                                 {
+                                    if ( b.NextActivityID == 201 ) { 
+                                        <div class="red">
+                                            <div>
+                                                @*<input type="submit" class="btn" disabled="@(b.NextActivityID == 205 || b.NextActivityID == 201 || b.NextActivityID == 204)" value="@b.NextActivity" />*@
+                                            
+                                                @if (b.NextActivityID == 201 && b.BetPhaseID == 1)
+                                                {
+                                                    <span>Waiting for @((b.User2ID == 0) ? "your friend" : b.User2) to respond. <br /><br />Call or message your friend to speed up the process.</span>
+                                                }
+                                                else if (b.NextActivityID == 201 && b.BetPhaseID == 2)
+                                                {
+                                                    <span>Waiting for @((b.User2ID == 0) ? "your friend" : b.User2) to make the endorsement.<br /><br />Call or message your friend to speed up the process.</span>
+                                                }
+                                                else if (b.NextActivityID == 201 && b.BetPhaseID == 3)
+                                                {
+                                                    <span>Waiting for @((b.User2ID == 0) ? "your friend" : b.User2) to cash-in the voucher.<br /><br />Call or message your friend to speed up the process.</span>
+                                                }
+                                            </div>
+                                        </div>
+                                     }
+                                     else if (b.NextActivityID == 202)
+                                     {  <div>
+                                            <input type="submit" class="button" style="margin-top: 15px;" value="Respond" title="Respond to this voucher" />
+                                        </div>
+                                     }
+
+                                 }
+                                 else
+                                 {
+                                     
+                                    <div>@Html.ActionLink(b.NextActivity, "EnterCreditInfo", new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID, BetValue = Convert.ToInt32(b.BetValue), Voucher1Value = Convert.ToInt32(b.Voucher1Value), Voucher2Value = Convert.ToInt32(b.Voucher2Value) }, new { @class = "NeoPopupOpen button typeCredit" + b.BetID, @title = "Enter credit card information" })</div>
+                                 }
+                            </div>
+
+
+                        }
+
+
+                        @*@if (b.EventsLog != null)
+                        {
+                            <div class="vhistory">
+                                <div class="head">
+                                    Show History <span class="down">&#x25BC;</span><span class="up">&#x25B2;</span>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        @foreach (EventData e in b.EventsLog)
+                                        {
+                                            <li>
+                                                @(e.UserID == WebSecurity.GetUserId(User.Identity.Name) ? "You have" : e.User + " has") <span class="activity">@e.ActivityDescription</span>
+                                                <div class="timestamp">(@e.InsertDate.ToFuzzyDate() &#64; @e.InsertDate.ToShortTimeString())</div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }*@
+
+
+                    }
+                }
+            }
+        </div>
+
+        <div class="clear-fix"></div>
+            @*@foreach (BetData b in Model)
+            {
+                using (Html.BeginForm(new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID }))
+                {
+                <div class="voucher @(!b.IsSupporter ? "alt" : "" )">
+                    <div class="vcode">
+                        <b>VOUCHER</b><br />No:<b> @(b.User2ID == 0 ? "/" : b.Voucher1Code)</b>
+                    </div>
+                    <div class="vvalue">
+                        <span>VALUE</span><br />
+                        @Convert.ToInt16(b.Voucher1Value)<div class="currency"><div>€</div></div>
+                    </div>
+                    <table class="vstatus">
+                        <tr><td>Status:</td><td class="highlight">@b.BetStatus</td></tr>
+                        <tr><td>Holder:</td><td>@b.User1 @(b.IsSupporter ? "(Supporter)" : "")</td></tr>
+                        <tr><td>Pair:</td><td>@(b.User2ID == 0 ? "Facebook friends" : b.User2) @(b.IsSupporter ? "" :  "(Supporter)" )</td></tr>
+                    </table>
+                    <div class="vactions">
+                        @if (b.NextActivityID != 203)
+                        {
+                            <input type="submit" class="button vaction" disabled="@(b.NextActivityID == 205 || b.NextActivityID == 201 || b.NextActivityID == 204)" value="@b.NextActivity" />
+                        }
+                        else
+                        {
+                            @Html.ActionLink(b.NextActivity, "EnterCreditInfo", new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID }, new { @class = "NeoPopupOpen button vaction", @title = "Enter credit card information" })
+                        }
+                    </div>
+
+                    <div class="vsteps">
+                        <div class="txt">Step:</div>
+                        <div title="Invitation send" class="step @(b.BetPhaseID >= 1 ? "active" : "" )">1</div>
+                        <div class="link @(b.BetPhaseID >= 2 ? "active" : "" )"></div>
+                        <div title="Invitation accepted" class="step @(b.BetPhaseID >= 2 ? "active" : "" )">2</div>
+                        <div class="link @(b.BetPhaseID >= 3 ? "active" : "" )"></div>
+                        <div title="Guarantee paid" class="step @(b.BetPhaseID >= 3 ? "active" : "" )">3</div>
+                        <div class="link @(b.BetPhaseID >= 4 ? "active" : "" )"></div>
+                        <div title="Vouchers active" class="step @(b.BetPhaseID >= 4 ? "active" : "" )">4</div>
+                    </div>
+                    @if (b.EventsLog != null)
+                    {
+                        <div class="vhistory">
+                            <div class="head">
+                                Show History <span class="down">&#x25BC;</span><span class="up">&#x25B2;</span>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    @foreach (EventData e in b.EventsLog)
+                                    {
+                                        <li>
+                                            @(e.UserID == WebSecurity.GetUserId(User.Identity.Name) ? "You have" : e.User + " has") <span class="activity">@e.ActivityDescription</span>
+                                            <div class="timestamp">(@e.InsertDate.ToFuzzyDate() &#64; @e.InsertDate.ToShortTimeString())</div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+                }
+            }*@
+
+            @*<div class="clear-fix">
+                <div class="kpi" style="margin-right: 80px;">
+                    <span class="heading">Connected<br />friends</span>
+                    <span class="value">2</span>
+                </div>
+                <div class="kpi">
+                    <span class="heading">Cashable<br />vouchers</span>
+                    <span class="value">€ 111</span>
+                </div>
+            </div>
+            <div>
+
+                <h2>Required actions</h2>
+                <p>Enter your credit card to activate bet with Matic Smolkovič <a href="#">Make Payment</a></p>
+                <p>An invitation from Tomaž Volk is waiting for you. <a href="#">Respond</a></p>
+                <p>Message Matjaž Peterman to respond to your invitation. <a href="#">Message</a></p>
+            </div>
+            <div>
+                <h2>History</h2>
+                <p>Your friend Matic Smolkovič has accepted your bet. (1 hours ago)</p>
+                <p>Your friend Tomaž Volk wants you to bet on him (3 hours ago)</p>
+                <p>Your have sent an invitation to Facebook friends (1 day ago)</p>
+                <p>Your have sent an invitation to Matjaž Peterman (1 day ago)</p>
+                <p>Welcome to SupportFriend. (1 day ago)</p>
+            </div>*@
+        </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script src="~/Scripts/Custom/NeoNotification.js"></script>
+    <script type="text/javascript">
+        $(".vhistory .head").click(function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                $(this).find(".down").show();
+                $(this).find(".up").hide();
+                $(this).parent().find(".content").hide();
+            }
+            else {
+                $(this).addClass("active");
+                $(this).find(".down").hide();
+                $(this).find(".up").show();
+                $(this).parent().find(".content").show();
+            }
+        });
+
+        var m = (window.innerWidth <= 461);
+        if (m) {
+            shuffle();
+        }
+
+        function shuffle() {
+            $(".center.unselected").unbind("click");
+            $(".left.unselected").unbind("click");
+
+            $(".center.unselected").click(function () {
+                $(this).parent().find(".left.selected").addClass("unselected");
+                $(this).parent().find(".left.selected").removeClass("selected");
+                $(this).parent().find(".center.unselected").addClass("selected");
+                $(this).parent().find(".center.unselected").removeClass("unselected");
+                shuffle();
+            });
+            $(".left.unselected").click(function () {
+                $(this).parent().find(".left.unselected").addClass("selected");
+                $(this).parent().find(".left.unselected").removeClass("unselected");
+                $(this).parent().find(".center.selected").addClass("unselected");
+                $(this).parent().find(".center.selected").removeClass("selected");
+                shuffle();
+            });
+        }
+
+        //NeoNotification("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "base");
+        //NeoNotification("Nulla iaculis, odio eu pulvinar suscipit, felis velit viverra lectus, eu vestibulum mi erat quis purus.", "success");
+        //NeoNotification("Pellentesque sit amet porttitor ligula.", "info");
+        //NeoNotification("Praesent porttitor leo eget faucibus ullamcorper.", "warning");
+        //NeoNotification("Integer a convallis mauris. Nulla pellentesque mollis risus, vel efficitur ipsum placerat in.", "error");
+    </script>
+
+    @if (ViewBag.Notification != null)
+    {
+        <script type="text/javascript">NeoNotification("@ViewBag.Notification.Message", "@ViewBag.Notification.Type.ToString()");</script>
+    }
+}

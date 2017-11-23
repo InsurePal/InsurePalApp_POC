@@ -1,0 +1,36 @@
+ALTER PROCEDURE [dbo].[spSUP_Event_Insert]
+	@BetGuid uniqueidentifier,
+	@UserID int,
+	@ActivityID int
+AS
+BEGIN
+
+DECLARE @TrueUserID int = NULL
+DECLARE @BetID int
+SET @BetID = (SELECT BetID FROM SUP_Bets WHERE [Guid] = @BetGuid)
+
+IF @UserID = -1 
+BEGIN
+	SET @TrueUserID = (SELECT User1ID FROM SUP_Bets WHERE [Guid] = @BetGuid)
+END
+IF @UserID = -2 
+BEGIN
+	SET @TrueUserID = (SELECT User2ID FROM SUP_Bets WHERE [Guid] = @BetGuid)
+END
+
+INSERT INTO [dbo].[SUP_Events]
+           ([BetID]
+           ,[UserID]
+           ,[ActivityID]
+           ,[Disabled]
+           ,[InsertDate]
+           ,[InsertUserID])
+     VALUES
+           (@BetID
+           ,ISNULL(@TrueUserID,@UserID)
+           ,@ActivityID
+           ,0
+           ,GETDATE()
+           ,@UserID)
+
+END

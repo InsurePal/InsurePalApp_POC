@@ -1,0 +1,76 @@
+﻿@model SupportFriends.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_FullHeight.cshtml";
+}
+
+<div class="logo">SUPPORT<b>FRIEND</b></div>
+
+<section id="registerForm">
+
+    <fieldset class="header-text">
+        <legend align="center">&nbsp;Sign in&nbsp;</legend>
+
+        @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl, id = ViewBag.ID, type = ViewBag.type, betStatus = ViewBag.betStatus, Button = "Sign in", Text = "or use email:" })
+    </fieldset>
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl, betStatus = Request.QueryString["betStatus"] })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @*<fieldset>
+        <legend>Log in Form</legend>
+        <div class="col-md-8 col-sm-10">
+        <form>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </div>
+        </form>
+        <input type="submit" value="Log in" class="btn btn-default" />
+        <p style="margin-top:20px;">
+            @Html.ActionLink("Register", "Register") if you don't have an account.
+        </p>
+        </div>
+    </fieldset>*@
+
+    <form>
+        <div class="fields">
+            E-mail
+            @Html.TextBoxFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+            Password
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+
+        <div class="rememberMe">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            Remember me
+        </div>
+
+        <input class="loginBtn button" type="submit" value="Sign in" />
+    </form>
+
+        }
+
+    <div class="additionalAcc">
+        <a>Forgot your password?</a><br />
+        Need an account? @Html.ActionLink("Sign up", "Register", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = Request.QueryString["betStatus"] }).
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

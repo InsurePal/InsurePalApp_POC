@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+
+
+<div id="header" style="position:relative;">
+    <div style="position:absolute; left:50%; margin-left:-383px;">
+        <div class="logo">SUPPORT<b>FRIEND</b></div>
+
+        <fieldset class="header-text">
+            <legend align="center">&nbsp;Sign up&nbsp;</legend>
+            and lower your insurance
+            <p>Join our safe drivers family, get and give safe driver guarantee from your friends and lower your insurance costs!</p>
+        </fieldset>
+
+        @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl, id = ViewBag.ID, type = ViewBag.type, betStatus = ViewBag.betStatus, Button = "Sign up", Text = "or create profile via email:" })
+    </div>
+
+    <div id="registerForm" style="position:absolute; padding:10px 0px; right:50%;  margin-right:-383px;">
+        <div class="formItem">
+            <div class="fields alt" style="text-align:left; border: 2px solid #e6e6e6;">
+                E-mail
+                @Html.TextBox("email")
+                Password
+                @Html.Password("password")
+                Confirm Password
+                @Html.Password("passCheck")
+                Name
+                @Html.TextBox("name")
+                <input class="createAccBtn button" type="submit" value="Create account" style="margin-top:0px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2><b>WHAT IS</b> SUPPORT <b>FRIEND</b></h2>
+
+<div>
+    <div class="badges">
+
+        <div class="badge">
+            <div class="bCell">
+                &nbsp;
+            </div>
+            <div class="bCell">
+                <div class="imgBadge">
+                </div>
+            </div>
+            <div class="bCell bHolder">
+                <div class="bText">
+                    <h3>Safe drivers welcome</h3>
+                    <p>Are you a safe driver? Then stop paying for others. Get up to 80% discount on your insurance premium, now!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="separator">
+            <div></div>
+        </div>
+
+        <div class="badge">
+            <div class="bCell bHolder">
+                <div class="bText">
+                    <h3>Little help of your friends</h3>
+                    <p>Ask your social circle to verify you are a reliable operator or vice versa. Each confirmation of a good driver enables massive discounts for both of you.</p>
+                </div>
+            </div>
+            <div class="bCell">
+                <div class="imgBadge badge2">
+                </div>
+            </div>
+            <div class="bCell">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="separator">
+            <div></div>
+        </div>
+
+        <div class="badge">
+            <div class="bCell">
+                &nbsp;
+            </div>
+            <div class="bCell">
+                <div class="imgBadge badge3">
+                </div>
+            </div>
+            <div class="bCell bHolder">
+                <div class="bText">
+                    <h3>Reap the benefits</h3>
+                    <p>No claims this year? Perfect. Welcome to the new world, where car insurance costs is balanced with actual driver performance.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div style="clear:both"></div>
+
+        <div style="width:">
+
+        </div>
+
+    </div>
+
+        <div class="bet-container3" style="background:url(../../Content/_images/bgr-blue.gif); position:relative; color:white; margin-top:56px;">
+
+            <h2 style="color:white; text-align:left; position:absolute; left:50%; margin-left:-242px !important;">WHERE<br />IS<br />THE<br />CATCH?</h2>
+            <p style="padding-left:120px; width:363px;">
+                When you are a safe driver, you usually overpay your insurance policy. Basically, you are paying more because of those, who are not safe drivers. To be honest, everyone can have an accident, but the frequency varies.
+                But let's say you havent't had an accident for a few years now. There is a great chance you won't have it in near future as well, so why not make a little guarantee and thus lower your insurance costs?
+            </p>
+            <br />
+            <p style="padding-left:120px; width:363px;">
+                For example, you ask your best friend John, to guarantee 120$ that you are a safe driver. He receives 20$ voucher and you get 80$ voucher.
+                You can cash in those vouchers at insurance company and lower your insurance costs for amount on voucher.
+            </p>
+            <br />
+            <p style="padding-left:120px; width:363px;">
+                If you make an accident before policy expiration, insurance company claims 120$ from John's. If you have no accident, like so many years before, no charges whatsoever are made.
+            </p>
+            <br />
+            <p style="padding-left:120px; width:363px;">
+                The story is the same when you guarantee for John. You get 100$, he gets 20$. If nobody has an accident, you both lower your insurance costs for 100$.
+            </p>
+            <br />
+            <p style="padding-left:120px; width:363px;">
+                Sounds fair? Great, let's make some guarantees then!
+            </p>
+
+        </div>
+</div>

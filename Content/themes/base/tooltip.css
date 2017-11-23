@@ -1,0 +1,71 @@
+/*!
+ * jQuery UI Tooltip 1.11.4
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/tooltip/#theming
+ */
+.ui-tooltip {
+	padding: 8px;
+	position: absolute;
+	z-index: 9999;
+	max-width: 300px;
+	-webkit-box-shadow: 0 0 5px #aaa;
+	box-shadow: 0 0 5px #aaa;
+    text-transform:none !important;
+    font-weight:normal !important;
+    border:none !important;
+}
+body .ui-tooltip {
+	border-width: 2px;
+}
+.ui-tooltip, .arrow:after {
+    background: #767b7f;
+	/*-webkit-box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 7px black;*/
+  }
+  .ui-tooltip {
+    padding: 5px 10px;
+    background:#767b7f !important;
+    color: white !important;
+    border-radius: 5px !important;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+    border-width:0px;
+  }
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -23px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }

@@ -1,0 +1,31 @@
+﻿
+
+@if (Request.IsAuthenticated)
+{
+    <div class="login-bar">
+
+        @*<span>
+            Hello @WebSecurity.CurrentUserName
+        </span>*@
+
+            @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="/#howitworks" class="loginLink" title="How it works">How it works</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="loginLink" title="Log out from SupportFriend">Log off</a>
+                <a href="@Url.Action("Index", "Dashboard")" class="loginLink" title="Visit your vouchers">My vouchers</a>
+            }
+
+    </div>
+}
+else
+{
+    <div class="login-bar">
+         <a href="/#howitworks" class="loginLink" title="How it works">How it works</a>
+        @Html.ActionLink("Sign in", "LoginPopup", "Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], ReturnUrl =  Request.QueryString["ReturnUrl"] }, new { @class = "NeoPopupOpen loginLink typeLogin", @title = "Sign in" })
+        @Html.ActionLink("Register", "RegisterPopup", "Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], ReturnUrl = Request.QueryString["ReturnUrl"] }, new { @class = "NeoPopupOpen loginLink typeRegister", @title = "Register" })
+        @*@Html.ActionLink(b.NextActivity, "EnterCreditInfo", new { Id = b.Guid.ToString(), Type = b.BetActionID, NextActivity = b.NextActivityID, NextStatus = b.NextStatusID }, new { @class = "NeoPopupOpen button vaction", @title = "Register" })*@
+        @*@Html.ActionLink("Sign in", "Login", "Account", routeValues: new { area = "" }, htmlAttributes: new { id = "loginLink", @class = "loginLink", title="Sign in SupportFriend" })
+        @Html.ActionLink("Register", "Register", "Account", routeValues: new { area = "" }, htmlAttributes: new { id = "registerLink", @class = "registerLink", title="Register to SupportFriend"  })*@
+    </div>
+}

@@ -1,0 +1,56 @@
+﻿@model SupportFriends.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+    ViewBag.ReturnUrl = "/Dashboard";
+}
+
+<div class="loginPopupHeader">
+    <img src="~/Content/_images/insurepal-logo-retina-C.png"  id="logo" onclick="$('#NeoPopupHolder').dialog('close');" style="cursor:pointer;" title="Close window" />
+</div>
+
+<div id="loginPopupForm">
+
+    <fieldset class="header-text">
+        <legend align="center">&nbsp;Sign up&nbsp;</legend>
+
+        @*s@Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl, id = ViewBag.ID, type = ViewBag.type, betStatus = ViewBag.betStatus, Button = "Sign in", Text = "or use email:" })*@
+        @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = Request.QueryString["ReturnUrl"], id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], Button = "Sign in", Text = "or use email:" })
+    </fieldset>
+
+    @*@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {*@
+    @using (Ajax.BeginForm("RegisterPopup", "Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], ReturnUrl = Request.QueryString["ReturnUrl"] }, new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
+        UpdateTargetId = "NeoPopupHolder",
+        LoadingElementId = "loader" // div with .gif loader - that is shown when data are loading
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <form>
+            <div class="fields">
+                
+                @Html.TextBoxFor(m => m.Email, new { placeholder = "E-mail" })
+                
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                
+                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+                
+                @Html.TextBoxFor(m => m.FullName, new { placeholder = "Name" })
+            </div>
+
+            @*<div class="additionalAcc">
+                Already have an account? @Html.ActionLink("Sign in", "Login", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = Request.QueryString["betStatus"] }, new { @class = "switchPopup", @data_btnType = "typeLogin" }).
+            </div>*@
+
+            <input class="createAccBtn button" type="submit" value="Create account" />
+        </form>
+
+    }
+</div>
+<div class="loginPopupFooter">
+    Already have an InsurePal account? <a class="button switchPopup" data-btnType="typeLogin">Sign in</a>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@model ICollection<AuthenticationClientData>
+
+@*@if (Model.Count == 0)
+{
+    <div class="message-info">
+        <p>There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=252166">this article</a>
+        for details on setting up this ASP.NET application to support logging in via external services.</p>
+    </div>
+}
+else
+{
+    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, id = ViewBag.id }))
+    {
+    @Html.AntiForgeryToken()
+    <fieldset id="socialLoginList">
+        <legend>Log in using another service</legend>
+        <p>
+        @foreach (AuthenticationClientData p in Model)
+        {
+            <button type="submit" class="btn btn-primary" name="provider" value="@p.AuthenticationClient.ProviderName" title="Log in using your @p.DisplayName account"><i class="fa fa-facebook-square fa-lg"></i> @p.DisplayName</button>
+        }
+        </p>
+    </fieldset>
+    }
+}*@
+
+<div class="social-login">
+    
+    @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, id = ViewBag.id, type = ViewBag.type, betStatus = ViewBag.betStatus, accept = Request.QueryString["accept"] }))
+    {
+        @Html.AntiForgeryToken()
+        foreach (AuthenticationClientData p in Model)
+        {
+            <button type="submit" class="button social-button" name="provider" value="@p.AuthenticationClient.ProviderName"><i class="fa fa-facebook fa-lg"></i>@ViewBag.Button with Facebook</button>
+        }
+    }
+    <fieldset>
+        <legend align="center">@ViewBag.Text</legend>
+    </fieldset>
+</div>

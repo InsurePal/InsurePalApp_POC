@@ -1,0 +1,4 @@
+﻿.userlogin { line-height:50px; float:right; color:#fff; padding:0px 20px; font-weight:bold; display:block; position:relative; cursor:pointer; }
+.userlogin:hover { color:#ddd; text-decoration:none; }
+.userlogin i { line-height:50px; }
+.user-dropdown .dropdown-menu { right:0px; left:auto; margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }

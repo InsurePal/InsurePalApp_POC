@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SupportFriends.Models.DAL.BetData>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+<div class="dashboard">
+    @Html.Partial("_DashboardMenuPartial")
+    <div class="window">
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BetValue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BetStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voucher1Value)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voucher1Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voucher1Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voucher2Value)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voucher2Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voucher2Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InsertDate)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BetValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BetStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher1Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher1Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher1Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher2Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher2Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher2Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InsertDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

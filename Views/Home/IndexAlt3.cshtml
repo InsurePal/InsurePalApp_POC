@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LowHeaderAlt.cshtml";
+}
+
+<style type="text/css"> 
+    #header-low {background:none; color:white; position:absolute; top:0px; width:100%; z-index:100; -webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none}
+    #header-low .logo {color:white;}
+    /*a:hover {color:black !important; text-decoration:none;}
+    #header-low .login-bar a.registerLink {background:white; color:#448593; }*/
+
+    .sliderHolder { font-size:26px; color:white; position:absolute; }
+    .sliderHolder .slide { float:left;  background-size: cover; background-position: center; height: 100%; min-height: 100%; }
+    .sliderHolder .slide .sliderContent {margin-top: 50vh; padding-top: 20px; }
+    .sliderBullets { font-size:26px; color:white; top:50vh; margin-top:120px; position:absolute; text-align:center; width:100%; }
+    .sliderBullets span { cursor:pointer; }
+    .sliderAction a {color: white; font-size: 16px; margin: 0 10px;}
+     .sliderAction {  position:absolute; top:50vh; margin-top:80px; text-align:center; width:100%;}
+    .sliderMenu {  position:absolute; height: 78px; top: 0px; width:100%; background: white;}
+
+
+    h2, h3, p {color: #8e9ca5;}
+    /*a {color: white !important;}*/
+    p {font-size: 15px;}
+
+    .abcd {width: 240px; height: 375px; background-image:url(../Content/_images/home-icons.jpg); background-repeat: no-repeat;  background-size: 960px 160px; float: left;    }
+    .abcd p {margin-top: 193px; text-align: center; color: #b3bbc5; line-height: 18px;}
+    .abc {margin-left: 53px; margin-right: 54px; width: 213px; height: 400px; float: left;}
+    .abc>div { background-image:url(../Content/_images/home-icons2.jpg); width: 213px; height: 213px; }
+    .abc p, .abc span  { text-align: center; color: white; font-size: 22px; margin: 36px 0;}
+</style>
+
+@section Scripts {
+    <script src="~/Scripts/Custom/NeoCarousel.js"></script>
+}
+
+<div id="header" style="position:absolute; height:100vh; width:100%; left:0px; background:#c6cbd3; overflow:hidden;">
+    <div class="sliderHolder" style="width:3000px;height: 100%; min-height: 100%;">
+        <div class="slide" style="background-image:url(content/_images/homepage-3-1.jpg);">
+            <div class="sliderMenu" style="background1: #c0c9d0;"></div>
+            <div class="sliderContent">
+                @*We reward <b>safe drivers</b> with<br />
+                up to <b>$500 lower</b> car insurance costs*@
+                Save up to <b>$500</b> on your auto insurance today
+                <div style="margin-top: 20px; color: white;">
+                    @*@if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Bet/Support-Me" class="button">Start saving now</a>
+                    }
+                    else
+                    {
+                        <a href="/Account/RegisterPopup" class="NeoPopupOpen button">Start saving now</a>
+                    }*@
+                </div>
+            </div>
+        </div>
+        <div class="slide"  style="background-image:url(content/_images/homepage-3-2.jpg);">
+            <div class="sliderMenu" style="background1: #87cfdb;"></div>
+            <div class="sliderContent">
+                @*<b>Endorse your friends</b> or get endorsed<br />
+                to enable massive discounts*@
+                Endorse your <b>friends</b> and save together
+                <div style="margin-top: 20px; color: white;">
+                    @*@if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Bet/Support-Me" class="button">Start saving now</a>
+                    }
+                    else
+                    {
+                        <a href="/Account/RegisterPopup" class="NeoPopupOpen button">Start saving now</a>
+                    }*@
+                </div>
+            </div>
+        </div>
+        <div class="slide"  style="background-image:url(content/_images/homepage-3-3.jpg);">
+            <div class="sliderMenu" style="background1: #8dcfb3;"></div>
+            <div class="sliderContent">
+                @*Supportfriend is <b>free</b> to use, so start receiving<br />
+                safe driver vouchers <b>now</b>! <br />*@
+                Your savings are <b>minutes</b> away
+                <div style="margin-top: 20px; color: white;">
+                    @*@if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="#about">Find out more</a>
+                        <a href="/Bet/Support-Me" class="button">Start saving now</a>
+                    }
+                    else
+                    {
+                        <a href="#about">Find out more</a>
+                        <a href="/Account/RegisterPopup" class="NeoPopupOpen button">Start saving now</a>
+                    }*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="sliderAction">
+        @if (User.Identity.IsAuthenticated)
+            {
+            <a href="#about">Find out more</a>
+                <a href="/Bet/Support-Me" class="button">Start saving now</a>
+        }
+        else
+        {
+            <a href="#about">Find out more</a>
+                <a href="/Account/RegisterPopup" class="NeoPopupOpen button">Start saving now</a>
+        }
+    </div>
+
+    <div class="sliderBullets">
+        <span>•</span>
+        <span>•</span>
+        <span>•</span>
+    </div>
+</div>
+
+<div style="padding-top:100vh; background: white; height: 1000px;  ">
+    <h2 style="padding: 40px 0 65px 0; margin: 0;" name="about" id="about">InsurePal is a <b>revolution</b> for insurance</h2>
+    <div class="home2" style="width: 960px; margin: 0 auto;">
+        <div class="abcd abcd1" style="">
+            <p>Jon is a safe driver<br />
+            He pays $1000/year for<br />
+            auto insurance</p>
+        </div>
+        <div class="abcd abcd2" style="background-position:-240px 0;">
+            <p>His friends and family<br />
+            endorse Jon to insurers<br />
+            and guarantee him</p>
+        </div>
+        <div class="abcd abcd3"  style="background-position:-480px 0;">
+            <p>Jon saves over $500<br />
+            on his insurance</p>
+        </div>
+        <div class="abcd abcd4"  style="background-position:-720px 0;">
+            <p>Insurance companies receive<br />
+                less damage claims</p>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+    <div style="width: 100%; height: 3px; background:url(../Content/_images/border-1.gif);"></div>
+    <div style="background: #dadee3; width: 100%; margin: 0 auto; padding-top: 40px; padding-bottom: 50px;">
+        <div class="home3" style="width: 960px; margin: 0 auto;">
+            <h2 style="margin: 0px 0 40px 0; color: white;">Who is it for?</h2>
+            <div class="abc abc1">
+                <p>Parents</p>
+                <div></div>
+                <p>backing children</p>
+            </div>
+            <div class="abc abc2" >
+                <p>Professionals</p>
+                <div style="background-position:-320px 0;"></div>
+                <p>supporting colleagues</p>
+            </div>
+            <div class="abc abc3">
+                <p>Students</p>
+                <div  style="background-position:-636px 0;"></div>
+                <p>helping students</p>
+            </div>
+            <div style="clear: both;"></div>
+            <div style="margin: 0 auto;  ">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="/Bet/Support-Me" class="button" style="margin: 20px auto; display: block; width: 95px; m">Start saving now</a>
+                }
+                else
+                {
+                    <a href="/Account/RegisterPopup" class="NeoPopupOpen button" style="margin: 20px auto;  display: block; width: 95px;">Start saving now</a>
+                }
+            </div>
+        </div>
+       
+    </div>
+    <div class="bet-container3" style="background: none; background-color: #d0d6dd; padding-bottom: 70px; padding-top: 0px;">
+        <h2 style="color: white; margin-bottom: 40px !important; padding-top: 37px;" name="howitworks" id="howitworks">How it works?</h2>
+        <video controls="controls" width="960" poster="~/Content/video/video-preview.JPG">
+            <source src="~/Content/video/SupportFriend.mp4" type="video/mp4" />
+        </video>
+
+    </div>
+
+    <div style="width: 100%; height: 199px;  background:url(../Content/_images/border-2.gif); position: relative;" id="homeFooter">
+        <a href="@Url.Content("~/")" style="position: absolute; left: -54px; margin-left: 50%; top: 56px; " >
+            <img src="~/Content/_images/insurepal-logo-retina-C.png" class="logo" style="height: 78px; margin-left: 0px !important;" />
+        </a>
+    </div>
+</div>

@@ -1,0 +1,400 @@
+﻿@using SupportFriends.Code.Enumerators
+@using SupportFriends.Models.DAL
+@using Neolab.Common
+@model List<BetData>
+
+    @using (Ajax.BeginForm("VouchersCashIn", "Dashboard", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
+        UpdateTargetId = "voucherHolder",
+        LoadingElementId = "loader" // div with .gif loader - that is shown when data are loading
+    }))
+    {
+        @Html.AntiForgeryToken()
+
+        //foreach (BetData b in Model) 
+        for (var i = 0; i < Model.Count; i++) 
+        {
+            
+        @Html.HiddenFor(m => m[i].Guid)
+        @Html.HiddenFor(m => m[i].BetStatusID)
+        @Html.HiddenFor(m => m[i].BetStatus)
+        @Html.HiddenFor(m => m[i].BetActionID)
+        @Html.HiddenFor(m => m[i].IsSupporter)
+        @Html.HiddenFor(m => m[i].User1)
+        @Html.HiddenFor(m => m[i].User2)
+
+        @Html.HiddenFor(m => m[i].Voucher1Code)
+        @Html.HiddenFor(m => m[i].Voucher1Value)
+        @Html.HiddenFor(m => m[i].Voucher2Code)
+        @Html.HiddenFor(m => m[i].Voucher2Value)
+
+        
+        @*<div class="voucher @(!((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) ? "inactive" : "")">*@
+         
+
+       
+       
+                @*<a target="_blank" class="button vaction" href="/Upload/credit-note_@(Model[i].File + ".jpeg")" style="display: inline-block;">View credit note</a>*@
+
+            <div>
+                <div class="ilovoucher @((Model[i].BetValue == 650) ? "red" : ((Model[i].BetValue == 260) ? "violet" :  ((Model[i].BetValue == 130) ? "blue" : "")))">
+                    <div style="position: absolute; left: 500px;">
+
+                        @Html.CheckBoxFor(m => m[i].CashIn, new { @class = "cbVoucher", id = Model[i].Guid,  @style = (((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) ? "display: block;" : "display: none;") })
+                        @if (((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)))
+                        {
+                            <input type="button" class="btn button vaction toggle" style="margin-bottom: 20px;"  value="@(((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) ? "Select voucher" : "Voucher inactive")" />
+                        }
+
+
+
+
+                        @if (Model[i].FilesList != null)
+                        {
+                            foreach (FileData f in Model[i].FilesList)
+                            {   
+                                <a href="/@f.FilePath" target="_blank" class="createAccBtn   btn button vaction" style="background:#8e9ca5; width: 100px; margin-top: 0px;">@(f.FileTypeID == 207 ? "Policy" : "Credit note")</a>
+                            }
+                       }
+                    </div>
+                    <div class="left  @((Model[i].IsSupporter ? "active selected" : "inactive unselected"))">
+                        <div class="holder">
+                            Endorser<br />
+                            <b>@((Model[i].IsSupporter ? Model[i].User1 : Model[i].User2))</b>
+                        </div>
+                        <div class="voucherInfo" style="@(!Model[i].IsSupporter ? "visibility: hidden;": "")">
+                            <b>VOUCHER</b><br />
+                            No. @(Model[i].User2ID == 0 ? "/" : (Model[i].Voucher1Code))
+                        </div>
+                        <div class="value">
+                            $<b>@Convert.ToInt16(Model[i].IsSupporter ? Model[i].Voucher1Value : Model[i].Voucher2Value)</b>
+                        </div>
+                    </div>
+                    <div class="center  @((Model[i].IsSupporter ? "inactive unselected" : "active selected"))">
+                        <div class="arrow"></div>
+                        <div class="holder">
+                            Safe driver<br />
+                            <b>@((Model[i].User2ID == 0) ? "Facebook friend" : (Model[i].IsSupporter ? Model[i].User2 : Model[i].User1))</b>
+                        </div>
+                        <div class="validUntil">
+                            @*Valid to<br />
+                            <b>@Model[i].InsertDate.AddYears(1).ToShortDateString()</b>*@
+                        </div>
+
+                        <div class="voucherInfo" style="@(Model[i].IsSupporter ? "visibility: hidden;": "")">
+                            <b>VOUCHER</b><br />
+                            No. @(Model[i].User2ID == 0 ? "/" : (Model[i].Voucher1Code))
+                        </div>
+                        <div class="value">
+                            $<b>@Convert.ToInt16((Model[i].IsSupporter ? Model[i].Voucher2Value : Model[i].Voucher1Value)) </b>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div>
+                            <div class="rotate90">$<b>@Convert.ToInt16(Model[i].BetValue)</b></div>
+                        </div>
+                    </div>
+                    <div class="clear-fix"></div>
+
+                </div>
+
+                <div class="ilosteps">
+                    @if (Model[i].IsSupporter) {
+                    <div title="Invitation send" class="step @(Model[i].BetPhaseID == 0 ? "active" : "" )">1</div>
+                    <div class="link @(Model[i].BetPhaseID == 1 ? "active" : "" )"></div>
+                    <div title="Invitation accepted" class="step @(Model[i].BetPhaseID == 1 ? "active" : "" )">2</div>
+                    <div class="link @(Model[i].BetPhaseID == 2 ? "active" : "" )"></div>
+                    <div title="Guarantee paid" class="step @(Model[i].BetPhaseID == 2 ? "active" : "" )">3</div>
+                    <div class="link @(Model[i].BetPhaseID == 3 ? "active" : "" )"></div>
+                    <div title="Vouchers active" class="step @((Model[i].BetPhaseID == 3 || (Model[i].BetPhaseID == 4 && Model[i].NextActivityID == 204)) ? "active" : "" )">@(Model[i].BetPhaseID == 4 && Model[i].NextActivityID == 204 ? "✓" : "4")</div>
+                    <div class="link @(Model[i].BetPhaseID == 4 ? "active" : "" )"></div>
+                    <div title="Vouchers active" class="step @(Model[i].BetPhaseID == 4 && Model[i].NextActivityID != 204 ? "complete" : "" )">@(Model[i].BetPhaseID == 4 && Model[i].NextActivityID != 204 ? "✓" : "5")</div>
+                    } else {
+                    <div title="Invitation send" class="step @(Model[i].BetPhaseID == 0 ? "active" : "" )">1</div>
+                    <div class="link @(Model[i].BetPhaseID == 1 ? "active" : "" )"></div>
+                    <div title="Invitation accepted" class="step @(Model[i].BetPhaseID == 1 ? "active" : "" )">2</div>
+                    <div class="link @(Model[i].BetPhaseID == 2 ? "active" : "" )"></div>
+                    <div title="Guarantee paid" class="step @(Model[i].BetPhaseID == 2 ? "active" : "" )">3</div>
+                    <div class="link @(Model[i].BetPhaseID == 3 ? "active" : "" )"></div>
+                    <div title="Vouchers active" class="step @(Model[i].BetPhaseID == 3 ? "active" : "" )">@(Model[i].BetPhaseID == 3 ? "✓" : "4")</div>
+                    <div class="link @(Model[i].BetPhaseID == 4 ? "complete" : "" )"></div>
+                    <div title="Vouchers active" class="step @(Model[i].BetPhaseID == 4 ? "complete" : "" )">@(Model[i].BetPhaseID == 4 ? "✓" : "5")</div>
+                    }
+                </div>
+
+
+                @if (Model[i].EventsLog != null)
+                {
+                    if (!Model[i].IsSupporter)
+                    {
+                        <div class="ilohistory">
+
+                            @{ int PreviousActivityID = -1;}
+
+                            @foreach (EventData e in Model[i].EventsLog)
+                            {
+
+                                if (e.ActivityID != PreviousActivityID)
+                                {
+                                    if (PreviousActivityID != -1)
+                                    {
+                                        @Html.Raw("</div>");
+                                    }
+
+                                    @Html.Raw("<div>");
+                                }
+
+                                PreviousActivityID = e.ActivityID;
+                                <div>
+                                    @(e.User ) @e.ActivityDescription.<br />-<br />
+                                    <div class="timestamp">@e.InsertDate.ToFuzzyDate() / @e.InsertDate.ToShortTimeString()</div>
+                                    @if (Model[i].NextActivityID == 204 && e.ActivityID == 204)
+                                    {
+
+                                    }
+                                </div>
+
+                            }
+                            @Html.Raw("</div>")
+
+                            @if (Model[i].NextActivityID != 203)
+                            {
+                                if ((Model[i].NextActivityID == 205 || Model[i].NextActivityID == 201) && Model[i].BetPhaseID != 4)
+                                {
+                                    <div class="red">
+                                        <div>
+                                            @*<input type="submit" class="btn" disabled="@(b.NextActivityID == 205 || b.NextActivityID == 201 || b.NextActivityID == 204)" value="@b.NextActivity" />*@
+                                            @if (Model[i].NextActivityID == 201 && Model[i].BetPhaseID == 1)
+                                    {
+                                                <span>Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to respond.</span>
+                                            }
+                                            else if (Model[i].NextActivityID == 201 && Model[i].BetPhaseID == 2)
+                                            {
+                                                <span>Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to make the endorsement.</span>
+                                            }
+                                            else if (Model[i].NextActivityID == 205)
+                                            {
+                                                <span>Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to cash-in the voucher.</span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model[i].NextActivityID == 201)
+                                {
+                                    <div class="red">
+                                        <div>
+                                            @*Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to respond1.*@
+                                        </div>
+                                    </div>
+                                }
+
+                                else if (Model[i].NextActivityID == 204)
+                                {
+                                    <div class="red">
+                                        <div>
+                                            <span>Waiting for @((Model[i].User1ID == 0) ? "your friend" : Model[i].User1) to cash-in the voucher.</span>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                            else
+                            {
+
+                            }
+                        </div>
+                                }
+                                else
+                                {
+
+
+                            <div class="ilohistory">
+                                @*<div>Bla bla<br /><span class="light">-<br />6.6.2016</span></div>
+                                    <div>Bla bla<br /><span class="light">-<br />6.6.2016</span></div>
+                                    <div>Bla bla<br /><span class="light">-<br />6.6.2016</span></div>
+                                    <div>
+                                        <a class="btn">Claim</a>
+                                    </div>
+                                *@
+                                @{ int PreviousActivityID = -1;}
+
+                                @foreach (EventData e in Model[i].EventsLog)
+                                {
+
+                                    if (e.ActivityID != PreviousActivityID)
+                                    {
+                                        if (PreviousActivityID != -1)
+                                        {
+                                            @Html.Raw("</div>");
+                                        }
+
+                                        @Html.Raw("<div>");
+                                    }
+
+                                    PreviousActivityID = e.ActivityID;
+
+                                    
+                                        <div>
+                                            @(e.UserID == WebSecurity.GetUserId(User.Identity.Name) ? "You" : e.User ) @e.ActivityDescription.<br />-<br />
+                                            <div class="timestamp">@e.InsertDate.ToFuzzyDate() / @e.InsertDate.ToShortTimeString()</div>
+                                            @if (Model[i].NextActivityID == 204 && e.ActivityID == 204)
+                                            {
+                                                <br />
+                                                <span style="color: #e72f49;">Waiting for @((Model[i].User1ID == 0) ? "your friend" : Model[i].User1) to cash-in the voucher.</span>
+                                            }
+                                        </div>
+                                 
+
+                                }
+                                @Html.Raw("</div>")
+
+                                @if (Model[i].NextActivityID != 203)
+                                {
+                                    if (Model[i].NextActivityID == 201)
+                                    {
+                                        <div class="red">
+                                            <div>
+                                                @*<input type="submit" class="btn" disabled="@(b.NextActivityID == 205 || b.NextActivityID == 201 || b.NextActivityID == 204)" value="@b.NextActivity" />*@
+
+                                                @if (Model[i].NextActivityID == 201 && Model[i].BetPhaseID == 1)
+                                                {
+                                                    <span>Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to respond.</span>
+                                                }
+                                                else if (Model[i].NextActivityID == 201 && Model[i].BetPhaseID == 2)
+                                                {
+                                                    <span>Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to make the endorsement.</span>
+                                                }
+                                                else if (Model[i].NextActivityID == 201 && Model[i].BetPhaseID == 3)
+                                                {
+                                                    <span>Waiting for @((Model[i].User2ID == 0) ? "your friend" : Model[i].User2) to cash-in the voucher.</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model[i].NextActivityID == 202)
+                                    {  <div>
+                                        <input type="submit" class="btn" style="margin-top: 15px;" value="Respond" title="Respond to this voucher" />
+                                    </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="red">
+                                        <div>
+                                            <span>Waiting for @((Model[i].User1ID == 0) ? "your friend" : Model[i].User1) to make the guarantee.</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                                        }
+
+                                    }
+
+
+                <input class="hfVoucherCode" type="hidden" value="@Model[i].Voucher1Code" />
+                <input class="hfBetStatus" type="hidden" value="@((int)Model[i].BetStatusID)" />
+                <input class="hfBetGUID" type="hidden" value="@Model[i].Guid" />
+                <input class="hfVoucherValue" type="hidden" value="@Model[i].Voucher1Value" />
+
+
+            </div>
+                        }
+
+
+        <input id="hfVoucherCode" name="hfVoucherCode" type="hidden"/>
+        <input id="hfBetStatus" name="hfBetStatus" type="hidden" />
+        <input id="hfBetGUID" name="hfBetGUID" type="hidden"  />
+        <input id="hfVoucherValue" name="hfVoucherValue" type="hidden" />
+        
+         <div class="voucherForm" id="cashinForm" style="width: 441px; background: #dce1e5; padding-bottom: 30px;">
+            <div class="formItem" >
+                <div class="heading" style="border-top: 0; text-align: center; padding-top: 20px;">
+                    Cash vouchers
+                </div>
+                <div class="fields" style=" background: #dce1e5" >
+                    <h3 id="spanTotal" style="color: #8e9ca5; text-align: center; margin: 0;"></h3>
+                    Reference:
+                    <input id="tbReference" name="tbReference" type="text" />
+                    <input type="submit" class="btn button" id="butCashin" style="background-color: #8e9ca5; margin: 0 auto; float: none;" value="Cash vouchers" />
+                </div>
+            </div>
+        </div>
+        
+    }
+
+<style>
+    .cbVoucher {display: none !important;}
+    .toggle { border: 2px solid #e72f49; background: white !important; color: #e72f49 !important;  width: 140px !important;}
+    .toggle.checked {border: 2px solid #e72f49 ; background: #e72f49 !important; color: white !important;  width: 140px;}
+</style>
+<script type="text/javascript">
+    var total = 0;
+
+    $(document).ready(function () {
+        $(".cbVoucher").click(function () {
+            if ($(this).is(":checked")) {
+                $(this).parent().find(".toggle").addClass("checked");
+                $(this).parent().find(".toggle").val("Voucher selected");
+
+                total += parseFloat($(this).parent().parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            } else {
+
+                $(this).parent().find(".toggle").removeClass("checked");
+                $(this).parent().find(".toggle").val("Select voucher");
+                total -= parseFloat($(this).parent().parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            }
+            if (total > 0) {
+                $("#cashinForm").show();
+            } else {
+                $("#cashinForm").hide();
+            }
+            evt.preventDefault();
+        });
+
+        $(".toggle").click(function () {
+           
+            if ($(this).parent().find(".cbVoucher").is(":checked")) {
+                $(this).removeClass("checked");
+                $(this).val("Select voucher")
+                
+                $(this).parent().find(".cbVoucher").prop('checked', false);
+                total -= parseFloat($(this).parent().parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            } else {
+                
+                $(this).addClass("checked");
+                $(this).val("Voucher selected");
+                $(this).parent().find(".cbVoucher").prop('checked', true);
+                total += parseFloat($(this).parent().parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            }
+            if (total > 0) {
+                $("#cashinForm").show();
+            } else {
+                $("#cashinForm").hide();
+            }
+            evt.preventDefault();
+        });
+
+        $(".vhistory .head").click(function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                $(this).find(".down").show();
+                $(this).find(".up").hide();
+                $(this).parent().find(".content").hide();
+            }
+            else {
+                $(this).addClass("active");
+                $(this).find(".down").hide();
+                $(this).find(".up").show();
+                $(this).parent().find(".content").show();
+            }
+        });
+
+    });
+</script>

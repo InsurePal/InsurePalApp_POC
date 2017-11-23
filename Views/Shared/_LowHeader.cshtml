@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - InsurePal</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    @RenderSection("MetaData", false)
+
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,400italic,700,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+
+    @*@Styles.Render("~/Content/fabundle")*@
+    @Styles.Render("~/Content/themes/base/css")
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/sfStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="header-low">
+        <div id="header-inner">
+        <a href="@Url.Content("~/")" class="logo">
+<img src="~/Content/_images/insurepal-logo-retina-C.gif"  /></a>
+
+        @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+
+    @RenderSection("Header", false)
+
+    <div id="body" class="container">
+        <section class="content-wrapper main-content">
+            @RenderBody()
+        </section>
+    </div>
+
+    <div id="NeoPopupHolder">        
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/notify.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#NeoPopupHolder").dialog({
+                autoOpen: false,
+                resizable: false,
+                modal: true,
+                width: (window.innerWidth <= 360 ? 320 : 360),
+                minHeight: 420,
+                title: this.title
+            });
+
+            var popupToOpen = null;
+            popupToOpen = getQstringParam("popup");
+
+            if(popupToOpen != null)
+                $("." + popupToOpen).click();
+
+            $(".tooltip").tooltip({
+                position: {
+                    my: "center bottom-10",
+                    at: "center top",
+                    using: function (position, feedback) {
+                        $(this).css(position);
+                        $("<div>")
+                          .addClass("arrow")
+                          .addClass(feedback.vertical)
+                          .addClass(feedback.horizontal)
+                          .appendTo(this);
+                    }
+                }
+            });
+        });
+
+        $(".NeoPopupOpen").click(function (event) {
+            event.preventDefault();
+            popupClickEvent(this.href);
+        });
+
+        function popupClickEvent(url) {
+            $("#NeoPopupHolder").load(url, function () {
+                $(this).dialog('open');
+                $(".switchPopup").click(function (event) {
+                    event.preventDefault();
+                    $("." + $(this).attr("data-btnType")).click();
+                });
+
+                if (window.innerWidth <= 461) {
+                    $(this).parent().css({
+                        'width': $(window).width(),
+                        'height': $(window).height(),
+                        'left': '0px',
+                        'top': '0px'
+                    });
+
+                    var contentHeight = $(this).find(".loginPopupHeader").outerHeight() + $(this).find("#loginPopupForm").outerHeight();
+                    var footerHeight = $(this).find(".loginPopupFooter").outerHeight();
+                    $(this).css("height", $(window).height() > contentHeight + footerHeight ? $(window).innerHeight() - footerHeight : contentHeight);
+                    $("#body").hide();
+                    $("#header-low").hide();
+                }
+            });
+        }
+
+        $('#NeoPopupHolder').on('dialogclose', function (event) {
+            $("#body").show();
+            $("#header-low").show();
+        });
+
+        $(window).resize(function () {
+            //if ($('#NeoPopupHolder').dialog('isOpen') === true) {
+            //$(this).dialog({ position: { my: "center", at: "center", of: window } });
+            //}
+            if (window.innerWidth > 461) {
+                $("#NeoPopupHolder").dialog("option", "width", window.innerWidth <= 360 ? 320 : 360);
+            }
+        });
+
+        function getQstringParam(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</body>
+</html>

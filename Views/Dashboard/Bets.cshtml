@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Bets";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+<div class="dashboard">
+     @Html.Partial("_DashboardMenuPartial")
+    <div class="window">
+         <div>
+            <h2>Friends who need your support</h2>
+             <p>Bla bla</p>
+        </div>
+         <div class="blue">
+            <h2>Friends who support you</h2>
+             <p>No data</p>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

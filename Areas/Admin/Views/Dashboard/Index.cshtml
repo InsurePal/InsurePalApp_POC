@@ -1,0 +1,71 @@
+﻿@model SupportFriends.Models.DAL.BetData
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+<style>
+    .cleanup {
+        background-image:url(/content/_images/axa-logo.png) !important; background-size: 80px 80px !important; display: block;
+    }
+
+</style>
+<div class="dashboardMenu admin" style="border-bottom: white 2px dotted;">
+    <div >
+        <div style="display: none;">
+            <div class="light">CASHED VOUCHERS</div>
+            <div class="hard">
+                8530 €
+            </div>
+            <div class="light">VALUE</div>
+        </div>
+    </div>
+    <div style="float:right">
+       <div class="friend" >
+            @*<div class="circle" style="background:url(/content/_images/axa-logo.png); background-size: 80px 80px "></div>*@
+           @Html.ActionLink(" ", "Cleanup", null, new { @class = "cleanup circle" })
+        </div>
+    </div>
+</div>
+
+<div class="dashboard admin">
+
+    <div class="window">
+
+            @using (Ajax.BeginForm("FindVoucherByCode", "Dashboard", new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
+                UpdateTargetId = "voucherHolder",
+                LoadingElementId = "loader" // div with .gif loader - that is shown when data are loading
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div >
+                 
+                    <div style="padding-left: 10px; float: left; width: 172px; height: 39px; line-height: 39px; background: #dce1e5; color: white; font-size: 20px; ">Enter voucher code</div>
+                     <div style="float: left; width: 259px; background: white; ">
+                             <div style="float: left; width: 152px;"><input id="tbVoucherCode" name="tbVoucherCode" type="text" style="height:37px; padding-left: 10px; width: 142px; font-size: 20px; border: 0;" /></div>
+                             <div style="float: left;"><input class="createAccBtn  button" type="submit" value="Find vouchers" style="width:105px; margin: 2px 2px 0 0;" /></div>
+                         </div>
+                        
+                      </div>
+            }
+
+
+        <div id="loader" class=" aletr" style="display:none">
+            Loading...<img src="~/Images/ajax-loader.gif" />
+        </div>
+
+        <div id="voucherHolder" style="padding:0px; margin-top: 40px; padding-top: 74px;">
+            @if (Model != null)
+            {
+                @Html.Partial("_VoucherByCodePartial")
+                
+            }
+
+        </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

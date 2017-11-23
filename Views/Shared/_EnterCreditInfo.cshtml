@@ -1,0 +1,58 @@
+﻿<style>
+    #NeoPopupHolder {padding-bottom: 0px !important; background: #ffffff;}
+</style>
+
+<section id="paymentForm" style="background: white;">
+    <div class="heading">
+        <b>Endorse your friend with a guarantee</b>
+    </div>
+    @*No money will be deducted from your account unless your friend makes a claim. <br /><br />*@
+   
+
+    @using (Html.BeginForm("PostCreditInfo", "Dashboard", new { Id = ViewContext.RouteData.Values["Id"], Type = ViewContext.RouteData.Values["Type"],  NextActivity = Request.QueryString["NextActivity"], NextStatus = Request.QueryString["NextStatus"] }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="formItem" style="position: relative;">
+            <div class="fields" style="color:#ffffff;">
+                <span>Cardholder name</span>
+                <input type="text" />
+                <span>Card number</span>
+                <input type="text" />
+                <span>Expiry date</span>
+                <input class="expDate" type="text" /><input class="expDate" type="text" />
+                <span>Card validation code</span>
+                <input class="valCode" type="text" />
+                <span>Amount</span>
+                <span style="font-size: 30px; color: #8e9ca5; ">$@Request.QueryString["BetValue"]</span>
+                <img src="~/Content/_images/cards.gif" style="position: absolute; right: 15px; bottom: 22px;"></img>
+            </div>
+            <br />Here’s how it works: you are endorsing your friend who will save $@Request.QueryString["Voucher2Value"] on their auto insurance. You will save $@Request.QueryString["Voucher1Value"] on your auto insurance. If your friend files a claim on this policy, you and your friend will lose your savings plus $@(Convert.ToInt32(Request.QueryString["BetValue"]) - Convert.ToInt32(Request.QueryString["Voucher1Value"]) - Convert.ToInt32(Request.QueryString["Voucher2Value"])). Total amount of guarantee is $@Request.QueryString["BetValue"]. No money will be deducted from your account unless your friend files a claim.<br />
+            <input class="createAccBtn button" type="submit" value="I agree" style="width: auto !Important;" />
+            <div style="margin:10px 0px 20px 0; text-align:center;">I want to endorse my friend with a <a href="javascript: cn()">written credit note instead</a>. </div>
+            <div class="fields" id="cn" style="display:none; margin-bottom: 20px;">
+                <div class="fileUpload">
+                    <span class="uplFake button">Upload credit note</span><br />
+                    <span id="uplLabel"></span>
+                    <input type="file" class="upload" id="uplFile" name="uplFile" />
+                    <div class="desc">Instead of a credit card guarantee, you can upload a written credit note.</div>
+                </div>
+            </div>
+        </div>
+
+        
+    }
+</section>
+
+<script type="text/javascript">
+    document.getElementById("uplFile").onchange = function () {
+        document.getElementById("uplLabel").innerHTML = this.value;
+        $("#removeFB").removeClass("inactive");
+    };
+
+    function cn() {
+        if ($("#cn").is(":visible")) {
+            $("#cn").hide();
+        } else {
+            $("#cn").show();
+        }
+    }
+</script>

@@ -1,0 +1,111 @@
+﻿@model SupportFriends.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+    ViewBag.ReturnUrl = "/Dashboard";
+    Layout = "~/Views/Shared/_HighHeader.cshtml";
+}
+
+<section id="registerForm">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+@*<fieldset>
+        <legend>Registration Form</legend>
+        <div class="col-md-8 col-sm-10">
+        <form>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </form>
+        <input type="submit" value="Register" class="btn btn-default" />
+        </div>
+    </fieldset>*@
+
+@*<fieldset>*@
+        <div class="formItem">
+            <div class="heading">
+                <div class="noCircle">1</div>
+                Account
+            </div>
+            <div class="fields">
+                E-mail
+                @Html.TextBoxFor(m => m.Email)
+                Password
+                @Html.PasswordFor(m => m.Password)
+                Confirm Password
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                Name
+                @Html.TextBoxFor(m => m.FullName)
+            </div>
+        </div>
+
+        @*<div class="formItem">
+            <div class="heading">
+                <div class="noCircle">2</div>
+                Profile
+            </div>
+            <div class="fields">
+                Name
+            <input type="text" />
+                Mobile number
+            <input type="tel" />
+            </div>
+        </div>
+
+        <div class="formItem">
+            <div class="heading">
+                <div class="noCircle">3</div>
+                Payment
+            </div>
+            <div class="fields">
+                <span>Cardholder name</span>
+                <input type="text" />
+                <span>Card number</span>
+                <input type="text" />
+                <span>Expiry date</span>
+                <input class="expDate" type="text" /><input class="expDate" type="text" />
+                <span>Card validation code</span>
+                <input class="valCode" type="text" />
+            </div>
+        </div>*@
+
+        <input class="createAccBtn button" type="submit" value="Create account" />
+        
+        <div class="additionalAcc">
+            Already have an account? @Html.ActionLink("Sign in", "Login", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = Request.QueryString["betStatus"] }).
+        </div>
+@*</fieldset>*@
+    }
+</section>
+
+@section Header {
+    <div class="logo">SUPPORT<b>FRIEND</b></div>
+
+    <fieldset class="header-text">
+        <legend align="center">&nbsp;Sign up&nbsp;</legend>
+        and lower your insurance
+        <p>Join our safe drivers family, get and give safe driver guarantee from your friends and lower your insurance costs!</p>
+    </fieldset>
+
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl, id = ViewBag.ID, type = ViewBag.type, betStatus = ViewBag.betStatus, Button = "Sign up", Text = "or create profile via email:" })
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,464 @@
+﻿body {margin:0px; font-family: 'Ubuntu', sans-serif; color:#377788; font-size: 13px; }
+body.full { height:100%; width:100%; background:url(_images/bgr-img.gif); }
+body.full .logo { padding-top:32px; opacity:0.6; text-align:center;  color:#377788;}
+input { font-family: 'Ubuntu'}
+
+
+h1 { font-size:30px; text-align:center; margin:0px; }
+h1.small { font-size:26px; text-align:center; margin:0px; }
+h2 { font-size: 26px; color:#377788; font-weight:normal; text-align: center; }
+p {font-size: 13px; line-height: 15px;}
+a {color:#377788; text-decoration: none;}
+a:hover {text-decoration: underline;}
+.clear-fix:after { content: "."; clear: both; display: block; height: 0; visibility: hidden; }
+.button { display:inline-block;  margin:0 auto; padding: 0 20px; height: 32px; background:#377788; color:white; font-size:18px; line-height: 32px; text-decoration: none; border:none; cursor:pointer; }
+input.button {line-height:28px;} /*krneki hack*/
+.button:hover { background:#929292; text-decoration: none; }
+.black {color: black !important;}
+
+
+.fileUpload { position: relative; overflow: hidden;  }
+.fileUpload input.upload { position: absolute; top: 0; right: 0; margin: 0; padding: 0; font-size: 20px; cursor: pointer; opacity: 0; filter: alpha(opacity=0);}
+.fileUpload .uplFake {display: inline-block; background: white; color:#377788; font-size: 13px; line-height: 32px; text-align: center; width: 180px;}
+.fileUpload.alt .uplFake { background: #377788; color:white; }
+.fileUpload .uplFake, .fileUpload #uplLabel {float: left;}
+.fileUpload #uplLabel {display: inline-block; font-size: 13px; line-height: 32px; height: 32px; margin-left: 10px;}
+
+.logo { font-size:26px; color: black;}
+.logo:hover { text-decoration: none;}
+.menu-btn i { font-size:26px; }
+
+.header-text { width:353px; border-top:2px #377788 solid; border-left:none; border-right:none; border-bottom:none; margin:0 auto; margin-top:30px; font-size:26px; padding:0px; font-weight:lighter; text-align:center; }
+.header-text legend { font-weight:bold; }
+/*.social-login button { -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px; height:40px; width:40px; background:#377788; border:none; color:white; font-size:20px; cursor:pointer; margin-bottom:15px; }*/
+.social-login button, .social-button {position: relative; height:32px; width:240px;  border:solid 2px #377788 ; color: #377788; font-size:14px; font-weight: bold; cursor:pointer; margin-bottom:5px; margin-top:6px;  padding-left: 28px; background: none; display:inline-block; line-height:28px; box-sizing:border-box; }
+.social-login button i, .social-button i { position: absolute; left: 0px; top: 0px; font-size: 18px; height: 28px; line-height: 28px; width: 28px; margin: 0px; border-right: solid 2px #377788; }
+.social-login button:hover, .social-button:hover { border: 2px solid #959190; color: #959190; text-decoration:none; }
+.social-login button:hover i, .social-button:hover i { border-right: 2px solid #959190; }
+.social-login p {font-weight: bold;}
+
+#header { height:320px; width: 100%; background:url(_images/bgr-img.gif); text-align:center; }
+#header .logo { padding-top:32px; opacity:0.6;   color:#377788; }
+
+#registerForm, #loginForm, #betForm { width:353px; margin:0 auto; padding: 39px 0px 40px 0px; }
+#registerForm .heading, #betForm .heading, .voucherForm .heading { display:block; font-size:19px; line-height:37px; border-top:2px solid; border-bottom:2px solid; border-color:#377788; font-weight:bold; color: #377788; }
+#registerForm .heading .noCircle, #betForm .heading .noCircle { border-radius: 11px;  -moz-border-radius: 11px; -webkit-border-radius: 11px; display: inline-block; font-weight: bold; height: 22px; line-height: 22px; margin: 7px 8px 0px 0px; text-align: center; width: 22px; font-size:18px; line-height: 22px; float:left; background:#377788; color:white }
+#registerForm .fields, #betForm .fields, .voucherForm .fields { background:#f1f1f1; padding:14px; font-size: 13px; }
+#registerForm .fields span, #loginForm .fields span, #betForm .fields span { display:block; }
+#registerForm .fields input[type=text], #loginForm .fields input[type=text], #betForm .fields input[type=text], .voucherForm .fields input[type=text] { border:none; line-height:16px; padding:8px; width:100%; box-sizing:border-box; font-size:13px; margin:3px 0px 13px 0px; }
+#registerForm .fields input[type=password], #loginForm .fields input[type=password], #betForm .fields input[type=password], .voucherForm .fields input[type=password] { border:none; line-height:16px; padding:8px; width:100%; box-sizing:border-box; font-size:13px; margin:3px 0px 13px 0px; }
+#registerForm .fields input.expDate { width:80px; margin-right:10px; }
+#registerForm .fields input.valCode { width:170px; margin-right:10px; }
+#registerForm .createAccBtn, #betForm .createAccBtn, #betForm .continueBtn  {display: block; margin:0 auto; margin-top:25px; padding: 0 10px;}
+#registerForm .additionalAcc { text-align:center; margin-top:20px; line-height:30px; color:#929292; }
+/*#registerForm .createAccBtn, #betForm .createAccBtn, #betForm .continueBtn  { display:block;  margin:0 auto; margin-top:40px; padding:10px; background:#377788; color:white; font-size:18px; border:none; font-weight:bold; cursor:pointer; }
+#registerForm .createAccBtn:hover, #betForm .createAccBtn:hover, #betForm .continueBtn:hover { background:#929292; }*/
+
+#loginForm {padding-top: 0px;}
+#loginForm .social-login {margin-top: 26px; margin-bottom: 10px;}
+#loginForm .social-login p {margin-top: 24px; }
+#loginForm .fields { margin-top:22px; font-size: 13px;  }
+#loginForm .rememberMe { text-align:center; margin-top:7px; }
+#loginForm .loginBtn { display: block; margin:0 auto; margin-top:27px; padding: 0 10px;}
+#loginForm .additionalAcc { text-align:center; margin-top:25px; line-height:30px; color:#929292; }
+/*#loginForm .loginBtn { display:block; margin:0 auto; margin-top:40px; padding:10px; background:#377788; color:white; font-size:25px; border:none; font-weight:bold; cursor:pointer; }
+#loginForm .loginBtn:hover { background:#929292; }*/
+
+.formItem .heading i { display:none; float:right; margin-top:9px; }
+.formItem.done .heading { color:#929292 !important; border-color:#929292 !important; border-bottom:0px !important; cursor:pointer; }
+.formItem.done .heading i { display:block; }
+.formItem.done .noCircle { background:#929292 !important; }
+.formItem.done .fields { display:none; border-top:2px solid #929292; }
+
+.formItem.inactive .heading { color:#f1f1f1 !important; border-color:#f1f1f1 !important;}
+.formItem.inactive .noCircle { background:#f1f1f1 !important; }
+.formItem.inactive .fields { display:none; }
+.formItem#uploadPolicy .fields {background: #377788; color: white;}
+
+/*ALT HOME PAGE*/
+.formItem .fields.alt input[type=text], .formItem .fields.alt input[type=password] { padding:5px !important; }
+/*ALT HOME PAGE*/
+
+#uploadPolicy.inactive  .heading { border-bottom-width: 0px !important; }
+#uploadPolicy .fields > span {display: inline-block; line-height: 32px; height: 32px; float: left;}
+#uploadPolicy .fields #cbNew {height: 26px;}
+
+.fields table { width:270px; }
+.fields table tr.active { /*background:#ffffff; font-size:*/ }
+.fields table.headingT { width:325px; }
+.fields table.headingT th:nth-of-type(1), .fields table.headingT th:nth-of-type(2), .fields table.headingT th:nth-of-type(3), .fields table.headingT th:nth-of-type(4) { width:68px; }
+.fields table th { font-size:12px; font-weight:normal; border-bottom:1px dotted; padding:10px 0px; text-align:center; width:67px; }
+.fields table td { /*border-bottom:1px dotted;*/ padding:10px 5px; text-align:center; width:25%; }
+.fields table th:nth-of-type(1), .fields table td:nth-of-type(1) { text-align:left; }
+/*.fields table th:nth-of-type(2), .fields table th:nth-of-type(3), .fields table td:nth-of-type(2), .fields table td:nth-of-type(3), .fields table td:nth-of-type(4) { text-align:right; }*/
+.fields table td { color:#323232; }
+.fields table td:nth-of-type(3) { font-weight:bold; }
+
+.fields .amo-btn { display:inline-block; font-size:10px; border:1px solid #377788; padding:3px; cursor:pointer; color:#377788; font-weight:bold; position:absolute; right:0px; top:45px; }
+.fields .amo-btn.active { background:#377788 !important; color:#ffffff; }
+.fields .amo-btn:hover { background:#929292; color:#ffffff; border-color:#929292; text-decoration: none; }
+
+.fields.blue { background:#377788 !important; }
+.fields.blue table th { color:#c3d6dc; }
+.fields.blue table td { color:#ffffff; }
+
+.fields.center {text-align: center;}
+.fields { position:relative; }
+.fields > div { position:relative; /*height:107px;*/ overflow:hidden; }
+
+.fields table .previous { transform:rotateX(-45deg); }
+.fields table .next { transform:rotateX(45deg); }
+
+.pricesOverlay 
+{
+    height:107px; width:270px; position:absolute; top:5px; left:0px;
+
+    background: none;
+
+    background: -moz-linear-gradient(top, rgba(241,241,241,0.8) 0%, rgba(241,241,241,0) 40%, rgba(241,241,241,0) 60%, rgba(241,241,241,0.8) 100%);
+    background: -webkit-linear-gradient(top, rgba(241,241,241,0.8) 0%,rgba(241,241,241,0) 40%, rgba(241,241,241,0) 60%, rgba(241,241,241,0.8) 100%);
+    background: linear-gradient(to bottom, rgba(241,241,241,0.8) 0%,rgba(241,241,241,0) 40%, rgba(241,241,241,0) 60%, rgba(241,241,241,0.8) 100%);
+    background: -o-linear-gradient(top, rgba(241,241,241,0.8) 0%,rgba(241,241,241,0) 40%, rgba(241,241,241,0) 60%, rgba(241,241,241,0.8) 100%);
+
+    /*background: -moz-linear-gradient(top,  rgba(146,146,146,0.8) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(146,146,146,0.8) 100%);
+    background: -webkit-linear-gradient(top,  rgba(146,146,146,0.8) 0%,rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(146,146,146,0.8) 100%);
+    background: linear-gradient(to bottom,  rgba(146,146,146,0.8) 0%,rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(146,146,146,0.8) 100%);
+    background: -o-linear-gradient(top,  rgba(146,146,146,0.8) 0%,rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(146,146,146,0.8) 100%);*/
+}
+.pricesOverlay .lineUp, .pricesOverlay .lineDown { width:100%; height:31px; cursor:pointer; }
+.pricesOverlay .lineUp.inactive, .pricesOverlay .lineDown.inactive { width:100%; height:31px; cursor:auto; }
+.pricesOverlay .lineUp { border-bottom:1px dotted #323232; }
+.pricesOverlay .lineDown { border-top:1px dotted #323232; margin-top:37px; }
+/*.fields i.upArrow, .fields i.downArrow { font-size:20px; position:absolute; right:12px; cursor:pointer; }
+.fields i.upArrow { top:10px; }
+.fields i.downArrow { bottom:7px; }*/
+
+.betPicker { height:90px !important; width:100%; padding-bottom:10px; margin-bottom:10px; border-bottom:1px dotted #323232; }
+.betPicker .item { height:90px; padding-bottom:10px; }
+.betPicker .items-list { margin-top:-200px; }
+.betPicker .badge { float:left; height:82px; width:90px; padding-top:8px; background:url(../Content/_images/price-badge.png); -webkit-background-size: cover;  -moz-background-size: cover;  -o-background-size: cover;  background-size: cover; font-size:28px; text-align:center; font-weight:bold; }
+.betPicker .badge span { font-size:12px; font-weight:normal; }
+.betPicker .extra { width:100%; clear:both; color:#323232; padding-top:10px; }
+.betPicker table { float:left; width:200px; margin-left:15px; width:140px; }
+.betPicker table span { color:#377788; display:inline !important; }
+.betPicker table td { padding:7px 0px; }
+.betPicker table td:nth-of-type(1) { width:90px; }
+.betPicker table td:nth-of-type(2) { text-align:right; font-weight:bold; }
+/*.betPicker i.upArrow { top:71px; right:18px; font-size:17px; }
+.betPicker i.downArrow { top:7px; right:18px; bottom:auto; font-size:17px; }*/
+.betPicker .upArrow, .betPicker .downArrow { font-size:12px; font-weight:normal; right:0px; display:inline-block; border:1px solid #377788; padding:3px; cursor:pointer; color:#377788; position:absolute; }
+.betPicker .upArrow { /*top:33px;*/ top:66px; }
+.betPicker .downArrow { top:0px; }
+.betPicker .amo-btn { font-size:12px; font-weight:normal; right:0px;  }
+.betPicker .upArrow, .betPicker .downArrow, .betPicker .amo-btn { width:58px; text-align:center; background:#f1f1f1; }
+.betPicker .upArrow i , .betPicker .downArrow i , .betPicker .amo-btn i { float:left; margin:2px 0px 0px 2px; }
+.betPicker .upArrow:hover, .betPicker .downArrow:hover { background:#929292; color:#ffffff; border-color:#929292; text-decoration: none; }
+
+.betPicker.alt { height:95px !important; border:none; }
+.betPicker.alt .items-list { margin-top:-210px; }
+.betPicker.alt .item { width:261px; height:96px; border:2px dashed #377788; padding-bottom:5px; }
+.betPicker.alt .badge { margin:5px 0px 0px 5px; cursor:pointer; }
+.extra { color:#323232; }
+.betPicker.alt .amo-btn { width:37px; text-align:center; }
+.betPicker.alt .amo-btn.more {top:0px; }
+.betPicker.alt .amo-btn.less { top:81px; }
+
+#header-low { height:58px; background:#f1f1f1; line-height:58px; color:#353535; }
+#header-low .logo { float:left; }
+#header-low .menu-btn { float:left; margin:5px 19px; cursor:pointer; }
+#header-low .login-bar { float:right; margin-right:20px; text-transform:uppercase; font-size:16px; }
+#header-low .login-bar form { display:inline-block; }
+#header-low .login-bar a {display:inline-block; height:32px; line-height:32px; text-decoration:none; color: inherit; padding:0px 13px; }
+#header-low .login-bar a.registerLink { background:#929292; color:#ffffff; cursor:pointer; }
+#header-low .login-bar a.loginLink:Hover { color:#377788; font-weight: bold; padding: 0 11px; }
+#header-low .login-bar a.registerLink:Hover { background:#377788; }
+
+.subheader { height:128px; width:100%; margin-bottom:90px; background:url(_images/bgr-img.gif); position:relative; }
+.subheader .badge-border, .subheader .badge-inner { position:absolute; left:50%; text-align:center; }
+.subheader .badge-border { width: 168px; height: 168px; background: #ffffff; -moz-border-radius: 84px; -webkit-border-radius: 84px; border-radius: 84px; margin-left:-84px; top:44px; }
+.subheader .badge-inner { width: 156px; height: 156px; background: #377788; -moz-border-radius: 78px; -webkit-border-radius: 78px; border-radius: 78px; margin-left:-78px; top:6px; }
+.subheader .badge-inner img { margin-top:44px; width: 128px; height: 73px; }
+.subheader .badge-inner img.img2 {width: 121px; height: 72px;}
+.bet-container h1 {font-size: 26px; }
+
+.bet-container1 { text-align:center; padding:52px 0px 104px; height: 331px; background:url(_images/bgr-img.gif); }
+.bet-container1 > div { width: 547px; background-image:url(_images/bet-bgr.png); background-position: center 27px; background-repeat: no-repeat; margin: 0 auto;  }
+.bet-container1 h1 {font-size: 32px; line-height: 32px; padding: 12px 0 20px 0; }
+.bet-picker, .bet-picker > a { display:inline-block; }
+.bet-picker { margin-top:63px;  }
+
+.bet-picker .separator { float: left;  width:117px; height: 203px; line-height: 203px; font-size: 32px; font-weight: bold; }
+.bet-picker .item { float: left; background:#377788; color:#ffffff; position:relative; width: 215px; height: 203px; cursor:pointer; text-decoration: none; }
+.bet-picker .item:hover { background:#333333; }
+.bet-picker .item span { display: inline-block; color: white;}
+.bet-picker .item .heading {font-size: 32px; line-height: 26px; font-weight: bold; margin: 16px auto 0 auto;  }
+.bet-picker .item .icon {display: block; width: 105px; height: 61px; background-image:url(_images/friends-ico-white.png); background-size: 105px 61px; margin: 11px auto 0px auto;  opacity:0.2;  }
+.bet-picker .item .icon2 {background-image:url(_images/getsupp-ico-white.png);  width: 99px; height: 60px; background-size: 99px 60px;  }
+.bet-picker .item .bet-btn {margin:17px auto 0 auto; padding: 0 20px; height: 28px;  color:white; font-size:18px; line-height: 28px; text-decoration: none; border:2px solid white; cursor:pointer; }
+.bet-picker .item:hover .bet-btn { color:#333333; background: white;}                         
+
+.bet-container2 { text-align:center; padding:37px 0px 47px 0; color:#ffffff; background:url(_images/bgr-blue.gif); }
+.bet-container2 h2  {font-size: 26px; color: white; font-weight: bold; margin: 0 !important; }
+.bet-container2 h3 {font-size: 16px; color: white; font-weight: bold; margin-top: 11px; margin-bottom: 9px;}
+.hiw-container { width:50%; box-sizing:border-box; float:left; margin-top:30px; padding-top: 14px; }
+.hiw-container > div { width:167px; text-align:center; }
+.bet-container2 img {width: 128px; height: 73px;}
+.bet-container2 img.img2 {width: 121px; height: 72px; margin-bottom: 1px;}
+.hiw-container.right { border-left:4px dotted #ffffff; margin-left: -2px; }
+.hiw-container.left > div { margin-right:82px; float:right; }
+.hiw-container.right > div { margin-left:82px; }
+
+.bet-container3 { text-align:center; padding:37px 0px; background:url(_images/bgr-img.gif); }
+.bet-container3 h2 {font-size: 26px;  font-weight: bold; margin: 0 0 24px 0 !important; }
+.bet-container3 > p { width:483px; margin:0 auto; text-align:justify; }
+.bet-container3 > h1 { margin-bottom:70px; }
+
+
+.main-content h2 {margin-top:50px; margin-bottom:42px; }
+.badges .badge { height: 250px; width: 1000px; margin: 0 auto;}
+.badges .badge .bCell:nth-of-type(1) { float: left; width: 375px; }
+.badges .badge .bCell:nth-of-type(2) { float: left; width: 250px; }
+.badges .badge .bCell:nth-of-type(3) { float: left; width: 375px; }
+.badges .badge .bCell .imgBadge { background-image: url('../Images/Home/badges-sheet.png'); width: 250px; height: 250px; margin-left: 50%; left: -125px; position: relative; }
+.badges .badge .bCell .imgBadge.badge2 {background-position:-250px 0px; }
+.badges .badge .bCell .imgBadge.badge3 {background-position:-500px 0px; }
+.badges .badge .bCell.bHolder { height: 250px; line-height: 250px; }
+.badges .badge .bCell.bHolder .bText { padding: 0px 0px 0px 50px; width: 230px; position: relative; display: inline-block; vertical-align: middle; line-height: normal; }
+.badges .badge .bCell.bHolder .bText h3 { text-align: left; text-transform: uppercase; font-size: 16px; margin: 9px 0; }
+.badges .badge .bCell.bHolder:nth-of-type(1) .bText { padding: 0px 50px 0px 95px; display: inline-block;  line-height: normal; text-align: right; }
+.badges .badge .bCell.bHolder:nth-of-type(1) .bText h3 { text-align: right; }
+.badges .separator { clear: both; position: relative; }
+.badges .separator div { background-color: #f1f1f1; position: absolute; height: 63px; width: 8px; display: block; margin-left: 50%; position: relative; left: -4px; }
+
+.home-invite {clear: both; height: 276px; margin-top: 56px; padding-top: 44px; background:url(_images/bgr-img.gif); }
+.home-invite div {width: 648px; height: 231px; margin: 0 auto; background:url('../Images/Home/bg-footer-01.jpg') no-repeat; }
+.home-invite h3 {font-size: 26px; font-weight: normal; margin-left: 333px; margin-top: 8px; margin-bottom: 8px;}
+.home-invite p, .home-invite .button {margin-left: 333px;}
+.home-invite .button {margin-top: 10px;}
+
+
+.home-header h1 { margin-top:44px; margin-bottom:20px; margin-left: 60px; color:#333333; font-size:32px; font-weight:100; line-height:38px; text-align: left; }
+.home-header h1.invited { text-align: center; margin-left: 0px; }
+.home-header .cover { background:url('../Images/Home/bg-header-01.jpg'); background-size:cover; height:386px; }
+.home-header .cover.invited {background:url(_images/bgr-img.gif);  }
+.home-header .cover .box { position: absolute; right: 83px; top: 106px; display: block; width: 215px; height: 203px; background: #377788;  text-decoration: none; }
+.home-header .cover .box:hover { background: #333333;}
+.home-header .cover .box span { display: inline-block; color: white;}
+.home-header .cover .box #heading {font-size: 32px; line-height: 26px; font-weight: bold; margin: 16px 10px 12px 17px;  }
+.home-header .cover .box #text {font-size: 18px; line-height: 18px;  margin: 13px 10px 13px 20px; }
+.home-header .cover .box #link {float: right; font-size: 22px;  margin: 10px; margin: 20px; }
+
+.home-header .content-holder {width: 583px; margin: auto; height: 386px; background-image:url('../Images/Home/bg-header-02.jpg'); background-repeat: no-repeat; padding:48px 0px 0px 417px; text-align:center;  }
+.home-header .content-holder h2 { font-size:26px; margin-top:0px; margin-bottom:0px; font-weight: bold; }
+.home-header .content-holder h3 { font-size:22px; font-weight: normal; margin-top: 0px; margin-bottom: 33px;}
+
+.home-header .content-holder table { width:462px; background-color:white; border:solid 2px #377788; margin: 0 auto;}
+.home-header .content-holder table thead { background-color:#377788; color:white; }
+.home-header .content-holder table th { text-transform: uppercase; }
+.home-header .content-holder table th, .home-header .content-holder td { padding:7px 16px; font-size:13px; font-weight:bold; }
+.home-header .content-holder table th:nth-of-type(1), .home-header .content-holder td:nth-of-type(1) { text-align:left; }
+.home-header .content-holder table tbody tr td:nth-of-type(2n) { background-color:#d7e4e7; }
+.home-header .content-holder .accept-btn{margin-top: 38px;}
+.home-header .content-holder .reject-btn{display: inline-block; width: 100px; height: 32px; line-height: 32px; text-decoration: none; font-size: 18px; padding: 0 3px; color: #377788; margin-top: 38px;}
+.home-header .content-holder .reject-btn:hover {width: 106px; padding: 0 0px; font-weight: bold; color: #929292;}
+.badges .center {text-align: center;} 
+.badges .accept-btn {margin-bottom: 57px;} 
+/*.home-header .content-holder .accept-btn { border:0px; color:white; font-weight:bold; background-color:#377788; font-size:28px; text-transform: uppercase; padding:14px 22px; line-height:32px; height:32px; text-align:center; cursor:pointer; text-decoration:none;  }*/
+
+.container { position: relative;}
+.dashboard .menu {position: absolute; height: 100%;  width: 250px; top: 0px; bottom: 0px;  z-index: -1; background:url(_images/bgr-img.gif); }
+.dashboard .menubgr {position: fixed; height: 100%; width: 250px; top: 0px;  z-index: -1; background:url(_images/bgr-img.gif); }
+.dashboard .badge-border {position:absolute; width: 168px; height: 168px; background: #ffffff; -moz-border-radius: 84px; -webkit-border-radius: 84px; border-radius: 84px; margin-left: 41px; top: 41px;   }
+.dashboard .badge-inner {position:absolute; width: 156px; height: 156px; background: gray; -moz-border-radius: 78px; -webkit-border-radius: 78px; border-radius: 78px; margin: 6px; }
+.dashboard .boxes {height: 90px; margin-top: 246px;} 
+.dashboard .box {float: left; width: 95px; height: 90px; margin-left: 20px;  background: #377788; } 
+.dashboard .box:hover { background: #333333;}
+.dashboard .box .heading {display: inline-block; font-size: 16px; line-height: 16px; color: white; font-weight: bold; margin: 8px auto 0 auto; text-align: center;  }
+.dashboard .box .icon {display: block; width: 47px; height: 27px; background-image:url(_images/friends-ico-white.png); background-size:47px 27px; margin: 11px auto 0px auto;  opacity:0.2;  }
+.dashboard .box .icon2 {background-image:url(_images/getsupp-ico-white.png);  width: 43px; height: 27px; background-size: 43px 27px;  }
+.dashboard .menu .menuitems {width: 209px; margin-left: 41px; margin-top: 40px; border-top: solid 1px #b9b9b9; }
+.dashboard .menu .menuitem {display: block; width: 192px; height: 38px; padding-left: 17px; font-size: 18px; line-height: 38px; border-bottom: solid 1px #b9b9b9; color: #8e8e8e; text-decoration: none; }
+.dashboard .menu .menuitem:hover {font-weight: bold; }
+.dashboard .menu .menuitem.active {font-weight: bold; background: white; }
+
+.dashboard .window {position: absolute; left: 250px; width: 480px; padding: 50px 0 40px 84px;  z-index: -2; }
+.dashboard .window > div {margin-bottom: 40px; padding: 15px 10px 10px 10px;}
+.dashboard .window > div.blue {background: #ecf1f4; margin-top: -10px;}
+.dashboard .window .kpi {float: left; width: 200px; height: 100px; margin: -15px 0px 0px -10px; background: #333333; }
+.dashboard .window .kpi  .heading {display: inline-block; font-size: 18px; line-height: 20px; margin-left: 10px; margin-top: 30px; color: white; }
+.dashboard .window .kpi  .value {float: right; display: inline-block; font-size: 32px; line-height: 100px; margin-right: 15px; color: white; font-weight: bold; }
+.dashboard .window h2 {width: 100%; border-bottom: 2px solid #377788; padding-bottom: 10px; font-size: 18px; text-align: left; margin-top: 0px;  margin-bottom: 0px; font-weight: bold;}
+.dashboard .window p {display: inline-block; color: #393939; width: 100%; border-bottom: 1px solid #f1f1f1; margin: 0px; padding: 8px 0;}
+
+.dashboard .voucher { position: relative; margin-bottom: 60px; background:#f1f1f1; font-size:18px; color:#000000; }
+.dashboard .voucher > div { padding:20px; }
+/*.dashboard .voucher.alt { border:3px dashed #353535; color:#353535; }*/
+.dashboard .voucher .vcode { font-size:21px; background:#377788; color:#ffffff; }
+.dashboard .voucher .vcode input { position: absolute; left: -40px; top: 38px; }
+/*.dashboard .voucher.alt .vcode { border-bottom:2px solid #353535; }*/
+.dashboard .voucher.inactive .vvalue { color:#929292; background:url(_images/price-badge-inactive.png); }
+.dashboard .voucher .vvalue { font-size:65px; position:absolute; top:-27px; right:25px; font-weight:bold; height:144px; width:144px; color:#377788; padding:0px; line-height:40px; text-align:center; background:url(_images/price-badge.png); }
+.dashboard .voucher .vvalue .currency { font-size:18px; vertical-align: super; font-weight:bold; width:12px; display:inline-block; }
+.dashboard .voucher .vvalue .currency div { float:left; }
+.dashboard .voucher .vvalue span { font-size:14px; line-height:00px; font-weight:normal; }
+.dashboard .voucher .vstatus { margin:20px; }
+.dashboard .voucher .vstatus td:nth-of-type(1) { width:110px; }
+.dashboard .voucher .vstatus td.highlight { color: #377788; }
+.dashboard .voucher .vstatus td:nth-of-type(2) { font-weight:bold; }
+.dashboard .voucher .vactions { margin: 0 auto; padding: 0; height:48px; text-align: center; }
+.dashboard .voucher .vaction {display: inline-block; padding: 0 20px; margin: 0 10px; text-decoration:none; height:48px; line-height:48px; }
+.dashboard .voucher .vaction:disabled { /*background:white !important; border:2px solid #929292;*/ background:none; border:none; color:#929292; cursor:auto; height: 48px; line-height: 44px; }
+.dashboard .voucher .vaction.checked {background:#929292; text-decoration: none; }
+.dashboard .voucher .vsteps { height:30px; }
+.dashboard .voucher .vsteps .step { -moz-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px; height:30px; width:30px; line-height:28px; float:left; font-size:20px; text-align:center; background:#959190; color:white; }
+.dashboard .voucher .vsteps .txt { float:left; line-height:28px;  width:66px; font-weight:bold; }
+.dashboard .voucher .vsteps .step.active { background:#377788; }
+/*.dashboard .voucher.alt .vsteps .step.active { background:#353535; }*/
+.dashboard .voucher .vsteps .link { margin:14px 0px; height: 0px; border-bottom:2px solid #959190; float:left; width:84px; }
+.dashboard .voucher .vsteps .link.active { border-bottom:2px solid #377788; }
+/*.dashboard .voucher.alt .vsteps .link.active { border-bottom:2px solid #353535; }*/
+.dashboard .voucher .vhistory { padding:0px; }
+.dashboard .voucher .vhistory .head { background:#929292; color:#ffffff; font-size:16px; padding:8px 20px; cursor:pointer; }
+.dashboard .voucher .vhistory .head.active { background:#377788; }
+.dashboard .voucher .vhistory .head span { float:right; }
+.dashboard .voucher .vhistory .head span.up { display:none; }
+.dashboard .voucher .vhistory .content { display:none; font-size:14px; }
+.dashboard .voucher .vhistory .content ul { margin:0px; padding:15px 50px; }
+.dashboard .voucher .vhistory .content ul li { margin-bottom:8px; }
+.dashboard .voucher .vhistory .content .activity { color:#377788; }
+.dashboard .voucher .vhistory .content .timestamp { color:#929292; font-size:10px; }
+
+.dashboard #butCashin { float: right;}
+.dashboard #cashinForm { display: none; }
+
+.dashboard.admin .menu {background:url(_images/bgr-blue.gif); }
+.dashboard.admin .menubgr {background:url(_images/bgr-blue.gif); }
+.dashboard.admin .badge-inner {background: black; }
+.dashboard.admin .menu .menuitems {margin-top: 246px; border-top: solid 1px black;}
+.dashboard.admin .menu .menuitem {border-bottom: solid 1px black; color: black; }
+.dashboard.admin .badge-inner {background-image:url(_images/acord.jpg); background-size: 156px 156px; }
+
+#fb-help { width:229px; height:65px; position:absolute; top:50%; left:50%; z-index: 100000; background:url(_images/text-bubble-small.png) no-repeat; padding:10px 40px 100px 30px; }
+#fb-help p { font-size:15px; line-height:20px; }
+
+#fb-help-bottom { width:229px; height:65px; position:absolute; top:50%; left:50%; z-index: 100000; background:url(_images/text-bubble-small-bottom.png) no-repeat; padding:10px 40px 100px 30px; }
+#fb-help-bottom p { font-size:15px; line-height:20px; margin-top: 59px; }
+
+@media (max-width: 768px) {
+
+    html, body, #header-low, .home-header { min-width:320px; }
+
+    #header-low .menu-btn { margin:5px 10px 5px 20px; }
+
+    #header-low .logo { font-weight: 300; font-size:18px; }
+    #header-low .logo b { font-weight: 400; }
+
+    #header-low .login-bar a#registerLink { font-size:18px; font-weight: 300; }
+    #header-low .login-bar a#loginLink { display:none; }
+
+    .home-header .cover { height:240px }
+    .home-header h1 { margin-left:10px; margin-top:30px }
+    .home-header .cover .box { z-index:10; width:150px; height:150px; top:360px; right:20px }
+    .home-header .cover .box #heading { font-size:18px; line-height:15px; margin: 10px 0px 0px 10px; }
+    .home-header .cover .box #text { display:none; }
+    .home-header .cover .box #link { font-size:14px; font-weight:100; margin:76px 10px 0px 40px; }
+    .home-header .cover .box #link b { font-size:22px; }
+
+
+    .containerxxxx { padding-top:50px; }
+
+    .badges { padding:0px 20px; width:280px;  margin: 0px auto;  }
+    .badges .badge { width:120px; height:120px; margin:0px; position:relative; }
+    .badges .badge .bCell { width:auto !important; }
+    .badges .badge .bCell:nth-of-type(1) { position:absolute; }
+    
+    .badges .badge .bCell.bHolder { height:120px; width:100% !important; float:left; }
+    .badges .badge .bCell.bHolder:nth-of-type(1) .bText { display:inherit; padding:0px; text-align:left; }
+    .badges .badge .bCell.bHolder:nth-of-type(1) .bText h3 { text-align:left; }
+    .badges .badge .bCell.bHolder .bText { width:170px; padding:0px; display:block; left:110px;  }
+    
+    .badges .badge .bCell .imgBadge { left:0px; margin-left: 0%; height:93px; width:93px; background-size:cover; position: absolute; }
+    .badges .badge .bCell .imgBadge.badge2 { background-position: -93px 0px; }
+    .badges .badge .bCell .imgBadge.badge3 { background-position: -186px 0px;  }
+    
+    .badges .separator div { margin-left:60px; }
+
+    .home-invite { padding-top:12px; width:100%; height:560px; text-align:center; }
+    .home-invite div { min-width:320px; width:320px; margin:0px auto; background-position-x:20px }
+    .home-invite h3 { margin-left:0px; padding:245px 20px 0px 20px; text-align:center; }
+    .home-invite p, .home-invite .button { text-align:justify; margin-left:inherit; padding:0px 20px; }
+
+
+
+    /*bet*/
+    .bet-container1 { margin-top:-30px; height: 110px; background-image:none;  }
+    .bet-container1 > div { width:auto; background-image:none;  }
+    .bet-container1 h1 { font-size:22px; letter-spacing:0.4pt }
+    .bet-container1 h1 br { display:none; }
+
+    .bet-picker { margin-top:22px }
+    .bet-picker .item .icon { display:none; }
+    .bet-picker .item { width:130px; height:86px; background-color:#c3d6dc; }
+    .bet-picker .item:nth-of-type(2) { margin-left:20px; }
+    .bet-picker .item .heading { letter-spacing:1pt; font-size:20px; line-height:17px; margin: 26px auto 0 auto; }
+    .bet-picker .item .bet-btn { margin: 13px auto 0 auto; line-height:24px; font-size:16px; text-transform: lowercase; background-color:#387788; border:0px; padding:3px 0px; height:24px; width:70px;  }
+    .bet-picker .item .bet-btn:first-letter { text-transform: uppercase; }
+    .bet-picker .separator { display:none; }
+
+    .hiw-container { margin-top: 25px; float:none; width:100%; padding:0px 20px; }
+
+    .hiw-container.right { border-left:none;   }
+    .hiw-container.left > div { float:none; width:100%; margin-right:0px; }
+    .hiw-container.right > div { border-top:4px dotted #ffffff; width:100%; margin-left:0px; padding-top:30px }
+    
+    .hiw-container p { line-height: 13pt; margin-top:0px; }
+
+    .bet-container2 { padding: 25px 0px 23px 0; }
+    .bet-container2 h2 { font-size:22px; }
+    .bet-container2 h3 { margin-top: 15px; margin-bottom:8px; letter-spacing:1.1pt }
+    .bet-container2 img { width: 93px; height: 53px; }
+    .bet-container3 p { width:auto; padding:0px 20px; text-align:center; }
+    .bet-container2 img.img2 { width:87px; height:52px; }
+    
+    .bet-container3 { padding: 24px 0px 37px 0px; }
+    .bet-container3 h2 { font-size:22px; margin: 0 0 16px 0 !important; }
+    
+    .bet-container3 > p { padding: 0px 20px; line-height:12.75pt; }
+
+    /*Account/login*/
+    #loginForm, #loginForm .header-text { width:auto; }
+    #loginForm { padding:0px 20px; }
+    #loginForm .header-text legend { /*font-size:20px;*/ }
+
+    #loginForm .validation-summary-errors { width:auto; max-width: 383px; margin:0px auto; }
+    #loginForm .validation-summary-errors ul { padding-left:14px; }
+
+    #loginForm .fields { margin: 17px auto 0px auto; padding:0px 11px 0px 11px; font-size: 14px; margin-top: 17px; max-width:383px; }
+    #loginForm .social-login { margin-bottom:0px; }
+    #loginForm .social-login p { margin-bottom:0px; }
+    #registerForm .fields input[type=text], #loginForm .fields input[type=text], #betForm .fields input[type=text], .voucherForm .fields input[type=text] { padding: 7px 8px 7px 8px; margin: 8px 0px 13px 0px; }
+    #registerForm .fields input[type=password], #loginForm .fields input[type=password], #betForm .fields input[type=password], .voucherForm .fields input[type=password] { padding: 7px 8px 7px 8px; margin: 8px 0px 13px 0px; }
+    #loginForm .rememberMe { text-align:left; padding-left:0px; max-width: 383px; margin: 0px auto; }
+    #loginForm .loginBtn { margin-top:14px; }
+    #loginForm .additionalAcc { margin-top: 8px; }
+
+    /*Account/Register*/
+    #registerForm { min-width:320px; width:auto; padding: 0px 0px 40px 0px; }
+    
+    #betForm { width: auto; padding: 0px 20px }
+
+    .header-text { width:auto; min-width:280px; }
+    #header { padding:0px 20px; width:auto; height:auto; padding-bottom:20px; }
+    #registerForm .formItem { padding: 20px; }
+
+    /*bet/Support-Friends*/
+    /*.bet-container { padding:0px 20px; }*/
+
+
+
+
+
+}
+
+
+

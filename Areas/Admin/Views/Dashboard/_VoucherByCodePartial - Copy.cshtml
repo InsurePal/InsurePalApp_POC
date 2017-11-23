@@ -1,0 +1,190 @@
+﻿@using SupportFriends.Code.Enumerators
+@using SupportFriends.Models.DAL
+@using Neolab.Common
+@model List<BetData>
+
+    @using (Ajax.BeginForm("VouchersCashIn", "Dashboard", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
+        UpdateTargetId = "voucherHolder",
+        LoadingElementId = "loader" // div with .gif loader - that is shown when data are loading
+    }))
+    {
+        @Html.AntiForgeryToken()
+
+        //foreach (BetData b in Model) 
+        for (var i = 0; i < Model.Count; i++) 
+        {
+            
+        @Html.HiddenFor(m => m[i].Guid)
+        @Html.HiddenFor(m => m[i].BetStatusID)
+        @Html.HiddenFor(m => m[i].BetStatus)
+        @Html.HiddenFor(m => m[i].BetActionID)
+        @Html.HiddenFor(m => m[i].IsSupporter)
+        @Html.HiddenFor(m => m[i].User1)
+        @Html.HiddenFor(m => m[i].User2)
+
+        @Html.HiddenFor(m => m[i].Voucher1Code)
+        @Html.HiddenFor(m => m[i].Voucher1Value)
+        @Html.HiddenFor(m => m[i].Voucher2Code)
+        @Html.HiddenFor(m => m[i].Voucher2Value)
+
+        
+        <div class="voucher @(!((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) ? "inactive" : "")">
+            <div class="vcode">
+                 <b>VOUCHER</b><br />No:<b> @Model[i].Voucher1Code</b>
+                  @Html.CheckBoxFor(m => m[i].CashIn, new { @class="cbVoucher", @style = (((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) ? "display: block;" : "display: none;")})
+            </div>
+            <div class="vvalue">
+                    <span>VALUE</span><br />
+                    @Convert.ToInt16(Model[i].Voucher1Value)<div class="currency"><div>€</div></div>
+            </div>
+            <table class="vstatus">
+                <tr><td>Status:</td><td class="highlight"><b>@Model[i].BetStatus</b></td></tr>
+                <tr><td>Holder:</td><td>@Model[i].User1 @(Model[i].IsSupporter ? "(Supporter)" : "")   </td></tr>
+                <tr><td>Pair:</td><td>@Model[i].User2 @(Model[i].IsSupporter ? "" :  "(Supporter)" ) (@Model[i].Voucher2Value €)</td></tr>
+                <tr><td> @((Model[i].Voucher1Reference == null || Model[i].Voucher1Reference == "") ? "" :  "Reference:" )</td><td> @((Model[i].Voucher1Reference == null || Model[i].Voucher1Reference == "") ? "" :  Model[i].Voucher1Reference )</td></tr>
+            </table>
+@*          
+            <input type="button" class="button vaction toggle" value="Select voucher" @{ if ((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) { <text> style="display: block;" </text> } else { <text> style="display: none;" </text> } }  />
+
+          *@
+            <div class="vactions">
+                <input type="button" class="button vaction toggle" value="@(((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) ? "Select voucher" : "Voucher inactive")" disabled="@(!((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)))" /> 
+
+               @*<a target="_blank" class="button vaction" href="/Upload/@(Model[i].File + "." + Model[i].FileExtension)"  @{ if (Model[i].FileExtension != null && Model[i].FileExtension != "") { <text> style="display: inline-block;" </text> } else { <text> style="display: none;" </text> } }>View policy</a>*@
+                <a target="_blank" class="button vaction" href="/Upload/credit-note_@(Model[i].File + ".jpeg")" style="display: inline-block;">View credit note</a>
+                
+            </div>
+            
+
+@*            <input type="checkbox" class="cbVoucher" @{ if ((Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Voucher1Cashed) || (!Model[i].IsSupporter && Model[i].BetStatusID == BetStatus.Guaranteed)) { <text> style="display: block;" </text> } else { <text> style="display: none;" </text> } } />*@
+
+
+
+            <div class="vsteps">
+                    <div class="txt">Step:</div>
+                    <div title="Invitation send" class="step @(Model[i].BetPhaseID >= 1 ? "active" : "" )">1</div>
+                    <div class="link @(Model[i].BetPhaseID >= 2 ? "active" : "" )"></div>
+                    <div title="Invitation accepted" class="step @(Model[i].BetPhaseID >= 2 ? "active" : "" )">2</div>
+                    <div class="link @(Model[i].BetPhaseID >= 3 ? "active" : "" )"></div>
+                    <div title="Guarantee paid" class="step @(Model[i].BetPhaseID >= 3 ? "active" : "" )">3</div>
+                    <div class="link @(Model[i].BetPhaseID >= 4 ? "active" : "" )"></div>
+                    <div title="Vouchers active" class="step @(Model[i].BetPhaseID >= 4 ? "active" : "" )">4</div>
+@*                    <div class="link @(Model[i].BetPhaseID >= 5 ? "active" : "" )"></div>
+                    <div title="Both vouchers claimed" class="step @(Model[i].BetPhaseID >= 5 ? "active" : "" )">5</div>*@
+                </div>
+             @if (Model[i].EventsLog != null) 
+             {
+             <div class="vhistory">
+                    <div class="head">
+                        Show History <span class="down">&#x25BC;</span><span class="up">&#x25B2;</span>
+                    </div>
+                    <div class="content">
+                        <ul>
+                           
+                                @foreach (EventData e in Model[i].EventsLog)
+                                {
+                                    <li>
+                                        @e.User has <span class="activity">@e.ActivityDescription</span>
+                                        <div class="timestamp">(@e.InsertDate.ToFuzzyDate() &#64; @e.InsertDate.ToShortTimeString())</div>
+                                    </li>
+                                }
+                        </ul>
+                    </div>
+                </div>
+             }
+            <input class="hfVoucherCode"  type="hidden" value="@Model[i].Voucher1Code" />
+            <input class="hfBetStatus"  type="hidden" value="@((int)Model[i].BetStatusID)" />
+            <input class="hfBetGUID"  type="hidden" value="@Model[i].Guid" />
+            <input class="hfVoucherValue"  type="hidden" value="@Model[i].Voucher1Value" />
+        </div>
+        
+        }
+        
+        
+        <input id="hfVoucherCode" name="hfVoucherCode" type="hidden"/>
+        <input id="hfBetStatus" name="hfBetStatus" type="hidden" />
+        <input id="hfBetGUID" name="hfBetGUID" type="hidden"  />
+        <input id="hfVoucherValue" name="hfVoucherValue" type="hidden" />
+        
+         <div class="voucherForm" id="cashinForm">
+            <div class="formItem" >
+                <div class="heading">
+                    Cash vouchers
+                </div>
+                <div class="fields" style="padding-bottom: 50px;">
+                    <h3 id="spanTotal"></h3>
+                    Reference:
+                    <input id="tbReference" name="tbReference" type="text" />
+                    <input type="submit" class="button vaction" id="butCashin" value="Cash vouchers" />
+                </div>
+            </div>
+        </div>
+        
+    }
+
+
+<script type="text/javascript">
+    var total = 0;
+    $(document).ready(function () {
+        $(".cbVoucher").click(function () {
+            if ($(this).is(":checked")) {
+                $(this).parent().parent().find(".toggle").addClass("checked");
+                $(this).parent().parent().find(".toggle").val("Voucher selected");
+
+                total += parseFloat($(this).parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            } else {
+
+                $(this).parent().parent().find(".toggle").removeClass("checked");
+                $(this).parent().parent().find(".toggle").val("Select voucher");
+                total -= parseFloat($(this).parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            }
+            if (total > 0) {
+                $("#cashinForm").show();
+            } else {
+                $("#cashinForm").hide();
+            }
+        });
+
+        $(".toggle").click(function () {
+            if ($(this).parent().parent().find(".cbVoucher").is(":checked")) {
+                $(this).removeClass("checked");
+                $(this).val("Select voucher")
+                
+                $(this).parent().parent().find(".cbVoucher").prop('checked', false);
+                total -= parseFloat($(this).parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            } else {
+                $(this).addClass("checked");
+                $(this).val("Voucher selected");
+                $(this).parent().parent().find(".cbVoucher").prop('checked', true);
+                total += parseFloat($(this).parent().parent().find(".hfVoucherValue").val().replace(",", "."));
+                $("#spanTotal").html("Total: " + total);
+            }
+            if (total > 0) {
+                $("#cashinForm").show();
+            } else {
+                $("#cashinForm").hide();
+            }
+        });
+
+        $(".vhistory .head").click(function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                $(this).find(".down").show();
+                $(this).find(".up").hide();
+                $(this).parent().find(".content").hide();
+            }
+            else {
+                $(this).addClass("active");
+                $(this).find(".down").hide();
+                $(this).find(".up").show();
+                $(this).parent().find(".content").show();
+            }
+        });
+
+    });
+</script>

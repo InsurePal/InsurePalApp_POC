@@ -1,0 +1,58 @@
+﻿@model SupportFriends.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="loginPopupHeader">
+    <img src="~/Content/_images/insurepal-logo-retina-C.png" id="logo" onclick="$('#NeoPopupHolder').dialog('close');" style="cursor:pointer;" title="Close window" />
+</div>
+
+<div id="loginPopupForm">
+
+    <fieldset class="header-text">
+        <legend align="center">&nbsp;Sign in&nbsp;</legend>
+
+        @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = Request.QueryString["ReturnUrl"], id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], Button = "Sign in", Text = "or use email:" })
+    </fieldset>
+
+    @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl, betStatus = Request.QueryString["betStatus"] }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)*@
+    @using (Ajax.BeginForm("LoginPopup", "Account", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = ViewContext.RouteData.Values["betStatus"], ReturnUrl = Request.QueryString["ReturnUrl"] }, new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
+        UpdateTargetId = "NeoPopupHolder",
+        LoadingElementId = "loader" // div with .gif loader - that is shown when data are loading
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <form >
+            <div class="fields">
+                @Html.TextBoxFor(m => m.UserName, new { placeholder = "E-mail" })
+                @*@Html.ValidationMessageFor(m => m.UserName)*@
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                @*@Html.ValidationMessageFor(m => m.Password)*@
+            </div>
+
+            <div class="rememberMe">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                Remember me
+            </div>
+
+            @*<div class="additionalAcc">
+                <a>Forgot your password?</a><br />
+                Need an account? @Html.ActionLink("Sign up", "Register", new { id = ViewContext.RouteData.Values["id"], type = ViewContext.RouteData.Values["type"], betStatus = Request.QueryString["betStatus"] }, new { @class = "switchPopup", @data_btnType = "typeRegister" }).
+            </div>*@
+
+            <input class="loginBtn button" type="submit" value="Sign in" />
+        </form>
+
+    }
+</div>
+<div class="loginPopupFooter">
+    Don't have an InsurePal account yet? <a class="button switchPopup" data-btnType="typeRegister">Register</a>
+</div>

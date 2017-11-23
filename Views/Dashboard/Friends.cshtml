@@ -1,0 +1,20 @@
+﻿@using SupportFriends.Models.DAL
+@model List<UserData>
+@{
+    ViewBag.Title = "Friends";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+
+
+<div class="dashboard">
+    @Html.Partial("_DashboardMenuPartial")
+    <div class="window">
+        <ul>
+            @foreach (UserData user in Model)
+            {
+                <li>@user.FullName</li>
+            }
+        </ul>
+    </div>
+</div>

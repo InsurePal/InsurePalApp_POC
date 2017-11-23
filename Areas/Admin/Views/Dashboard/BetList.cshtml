@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SupportFriends.Models.DAL.BetData>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+<div class="dashboard admin">
+    @Html.Partial("_DashboardMenuPartial")
+    <div class="window" style="width: 100%;">
+        <div>
+            <table class="table" style="width: 100%;">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Supporter (A)", "BetList", new { sortOrder = ViewBag.User1SortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Supporter (B)", "BetList", new { sortOrder = ViewBag.User2SortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Support value", "BetList", new { sortOrder = ViewBag.SupportValueSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Status", "BetList", new { sortOrder = ViewBag.StatusSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Voucher A value", "BetList", new { sortOrder = ViewBag.VoucherAValueSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Voucher A code", "BetList", new { sortOrder = ViewBag.VoucherACodeSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Voucher A status", "BetList", new { sortOrder = ViewBag.VoucherAStatusSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Voucher B value", "BetList", new { sortOrder = ViewBag.VoucherBValueSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Voucher B code", "BetList", new { sortOrder = ViewBag.VoucherBCodeSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Voucher B status", "BetList", new { sortOrder = ViewBag.VoucherBStatusSortParam })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Insert date", "BetList", new { sortOrder = ViewBag.InsertDateSortParam })
+                    </th>
+                    <th width="100%"></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BetValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BetStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher1Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher1Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher1Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher2Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher2Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voucher2Status)
+                        </td>
+                        <td>
+                            @item.InsertDate.ToShortDateString()
+                        </td>
+                        <td width="100%">
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

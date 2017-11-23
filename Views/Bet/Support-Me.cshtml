@@ -1,0 +1,683 @@
+﻿@{
+    ViewBag.Title = "SupportMe";
+    Layout = "~/Views/Shared/_LowHeader.cshtml";
+}
+
+<div class="bet-container">
+
+    @section Header {
+        @*<div class="subheader">
+            <div class="badge-border">
+                <div class="badge-inner">
+                    <img class="img2" src="~/Content/_images/getsupp-ico-white.png" />
+                </div>
+            </div>
+        </div>*@
+
+    }
+
+    <h1 class="small" style="margin-top: 45px !important; margin-bottom: -3px !important;">Ask a friend to endorse you and save together</h1>
+
+    <div class="currentlySaved">
+        <div class="badge">
+            $<b>0</b>
+        </div>
+        <div class="verbal">(a few drinks)</div>
+    </div>
+
+    <p class="description" style="visibility: hidden;">&nbsp;@*You can also offer to endorse others by clicking @Html.ActionLink("here", "Support-Friends").*@</p>
+
+    @*@using (Html.BeginForm("SupportMePlaceBet", "Bet", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {*@
+        <div id="betForm">
+            <div class="formItem" >
+                <div class="heading">
+                    <div class="noCircle moreHide">1</div>
+                    <div id="heading1" style="display: inline-block;">How much do you want to save?</div>
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </div>
+                <div class="iloBetPicker">
+                    <div class="items-list">
+                        <div class="ilovoucher item" data-amountID="65">
+                            <div class="left active unselected">
+                                <div class="holder">
+                                    Your friend's savings<br /><br />
+                                </div>
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>10</b>
+                                </div>
+                            </div>
+                            <div class="center active selected">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    Your savings<br /><br />
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@DateTime.Now.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>50</b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>65</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                        </div>
+                        <div class="ilovoucher blue item" data-amountID="130">
+                            <div class="left active unselected">
+                                <div class="holder">
+                                    Your friend's savings<br /><br />
+                                </div>
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>20</b>
+                                </div>
+                            </div>
+                            <div class="center active selected">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    Your savings<br /><br />
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@DateTime.Now.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>100</b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>130</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                        </div>
+                        <div class="ilovoucher violet item" data-amountID="260">
+                            <div class="left active unselected">
+                                <div class="holder">
+                                    Yor friend's savings <br /><br />
+                                </div>
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                   $<b>40</b>
+                                </div>
+                            </div>
+                            <div class="center active selected">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    Your savings<br /><br />
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@DateTime.Now.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>200</b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>260</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                        </div>
+                        <div class="ilovoucher red item" data-amountID="650">
+                            <div class="left active unselected">
+                                <div class="holder">
+                                    Your friend's savings<br /><br />
+                                </div>
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>100</b>
+                                </div>
+                            </div>
+                            <div class="center active selected">
+                                <div class="arrow"></div>
+                                <div class="holder">
+                                    Your savings<br /><br />
+                                </div>
+                                <div class="validUntil">
+                                    @*Valid to<br />
+                                    <b>@DateTime.Now.AddYears(1).ToShortDateString()</b>*@
+                                </div>
+                                @*<img class="watermark" src="~/Content/_images/voucher-watermark.png" />*@
+                                <div class="voucherInfo">
+                                    <b>VOUCHER</b><br />
+                                    No. #######
+                                </div>
+                                <div class="value">
+                                    $<b>500</b>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div>
+                                    <div class="rotate90">$<b>650</b></div>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                        </div>
+                    </div>
+                    @*<a class="amo-btn"><i class="fa fa-check" aria-hidden="true"></i> Choose</a>*@
+                    @*<i class="fa fa-minus upArrow" aria-hidden="true" title="Give me less"></i>
+            <i class="fa fa-plus downArrow" aria-hidden="true" title="Give me more"></i>*@
+                </div>
+                <a class="upArrow"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                <a class="downArrow"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+                <div class="valueBadge green"><span>VOUCHER</span><br /><b>44</b> $<br /><span>VALUE</span></div>
+                <div class="valueBadge blue active"><span>VOUCHER</span><br /><b>90</b> $<br /><span>VALUE</span></div>
+                <div class="valueBadge violet"><span>VOUCHER</span><br /><b>180</b> $<br /><span>VALUE</span></div>
+                <div class="valueBadge red"><span>VOUCHER</span><br /><b>440</b> $<br /><span>VALUE</span></div>
+
+                <div class="info">
+                    <div class="infodot1"></div><div class="infodot2"></div><div class="infodot3"></div>
+                    <div class="info1">For your friend</div>
+                    <div class="info2">For you</div>
+                    
+                    <div class="info3 moreHide">The voucher above shows the savings that you and your friend will receive with InsurePal. You can use your voucher just like cash when paying for auto insurance.</div>
+                </div>
+                <a class="button chooseAmount moreHide" id="buttonPrice">Save $500</a>
+                <div class="info5 moreHide" style="margin-bottom: 15px;">Don't want to get endorsed? @Html.ActionLink("Click here", "Support-Friends", routeValues: new { }, htmlAttributes: new { style = "color: white;" }) to endorse others.</div>
+            </div>
+
+            <div class="formItem inactive" id="uploadPolicy">
+                <div class="heading moreHide">
+                    <div class="noCircle">2</div>
+                    Upload your current policy
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </div>
+
+                <div class="fields" style="padding: 14px 30px;">
+                    @*<span>Current policy</span>*@
+                    <div class="fileUpload" style="float: left; margin-bottom: 20px;">
+                        <span class="uplFake button">Upload current policy</span>
+                        <div>
+                            <input type="file" class="upload" id="uplFile" name="uplFile" />
+                            <span id="uplLabel" style="color:#8e9ca5; margin-left: 44px;">Get extra <b>10$</b> bonus!</span>
+                        </div>
+                    </div>
+                    <div class="noUpload" style="width: 110px; vertical-align: top; margin-top: 5px; float: right;">
+                        <input type="checkbox" id="cbNew" value="This is a new car" style="float: left;" /><span style="width: 80px; font-size: 13px;float: left; margin-left: 5px; margin-top: 7px;">Remind me later</span>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+
+            @using (Ajax.BeginForm("SupportMePlaceBet", "Bet", new AjaxOptions
+            {
+                InsertionMode = InsertionMode.InsertAfter, //target element(#patientList) will be replaced
+                UpdateTargetId = "UlEmailsList",
+                LoadingElementId = "loader", // div with .gif loader - that is shown when data are loading
+                OnSuccess = "AjaxPostCompleted"
+            }))
+            {
+                    <div class="formItem inactive" id="removeFB">
+                        <div class="heading moreHide">
+                            <div class="noCircle">3</div>
+                            Invite your friends
+                        </div>
+                        <div class="info6 moreHide">You are being endorsed by your friend and you will save $<span id="price1">500</span> on your auto insurance. You friend will save $<span id="price2">100</span> on his/her auto insurance. If you file a claim on this policy, you and your friend will lose your savings plus $<span id="price3">50</span>. Total amount of guarantee is $<span id="price4">650</span>.</div>
+                        <div class="fields center">
+                            @*@Html.Action("ExternalInvitation", new { id = ViewBag.ID, Text = "or invite via email:", Label = "Invite Facebook friend" })*@
+
+                            <div class="social-login" style="margin-top: 10px;">
+                                @*<a href="@Url.Action("FacebookExplaination", new { id = ViewBag.ID })" class="NeoPopupOpen social-button" title="Invite Facebook friends"><i class="fa fa-facebook fa-lg"></i>Invite Facebook friend</a>*@
+                                <a href="#" id="invite-btn" class="button social-button" title="Invite Facebook friends"><i class="fa fa-facebook fa-lg"></i>Invite Facebook friend</a>
+                                <div id="invite-mobile">
+                                    <div class="txt">Invite Facebook friend:</div> <div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/"></div>
+                                </div>
+                                @*<p>or invite via email:</p>*@
+                                <fieldset>
+                                    <legend align="center">or:</legend>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="fields" style="padding-top: 3px;">
+                            @*Name
+                    <input id="tbName" name="tbName" type="text" />*@
+                            E-mail
+                            <input id="tbEmail" name="tbEmail" type="text" required="required" />
+                        </div>
+                    </div>
+
+                    <input class="createAccBtn button" id="BtnAddEmail" type="submit" value="Invite via email" style="display:none; margin-top: 4px; margin-bottom: 30px;" />
+                    <input type="button" class="continueBtn button" value="Continue" style="display:none;" onclick="window.location.href = '/Dashboard/Index';" />
+
+                    <div class="fields" style="padding: 0;">
+                        <div id="InvitedList" style="display:none;">
+                            <h3>Friends you have invited so far:</h3>
+                            <ul id="UlEmailsList"></ul>
+                        </div>
+                    </div>
+
+                    @Html.Hidden("hfAmount", "650")
+            }
+        </div>
+    @*}*@
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        var timeFBhelp = null;
+        var firstFBhelp = false;
+        
+        var voucherWidth = 441;
+        var activePriceIndex = 3;
+        var disableUp = 0;
+        var disableDown = 1;
+
+        $(document).ready(function () {
+            $(".chooseAmount").click(function () {
+                //$("#hfAmount").val($(this).attr("data-amountID"));
+
+                $(".amo-btn").removeClass("active");
+                $(this).addClass("active");
+
+                $("tr").removeClass("active");
+                $(this).parent().parent().addClass("active");
+
+                $("#uploadPolicy").removeClass("inactive");
+                $(".info5").hide();
+                $("#heading1").html("I want to save $" + $("#price1").html());
+                //$(".createAccBtn").show();
+                
+                var formItem;
+                if($(this).hasClass("chooseAmount")){
+                    formItem = $(this).parent();
+                }
+                else {
+                    formItem = $(this).parent().parent();
+                }
+                formItem.addClass("done");
+
+                formItem.find(".heading").unbind();
+                formItem.find(".heading").click(function(){
+                    $(this).parent().find(".fields").toggle();
+                });
+            });
+            $("#cbNew").click(function () {
+                $("#removeFB").removeClass("inactive");
+                $(".createAccBtn").show();
+                $(".info6").show();
+
+                var formItem = $(this).parent().parent();
+                formItem.addClass("done");
+
+                formItem.find(".heading").unbind();
+                formItem.find(".heading").click(function(){
+                    $(this).parent().find(".fields").toggle();
+                });
+            });
+
+            resizeVoucher();
+        });
+            
+        $(window).resize(function () {
+            resizeVoucher();
+        });
+
+        function resizeVoucher (){
+            if($(window).innerWidth()<462) {
+                voucherWidth = 280;
+            }
+            else {
+                voucherWidth = 441;
+            }
+            $(".iloBetPicker .items-list").width($(".ilovoucher").length * voucherWidth).css("margin-left", -(activePriceIndex * voucherWidth));
+        }
+
+
+        document.getElementById("uplFile").onchange = function () {
+            document.getElementById("uplLabel").innerHTML = this.value;
+            $("#removeFB").removeClass("inactive");
+            $(".createAccBtn").show();
+
+            $(this).parent().parent().parent().addClass("done");
+        };
+
+        function openFbSendDialog () {
+
+            var formData = new FormData();
+            formData.append('amount', $('#hfAmount').val());
+            formData.append('betActionID', '115');
+            formData.append('uplFile', $('input[type=file]')[0].files[0]);
+            data:  formData
+
+            $.ajax({
+                type: "POST",
+                url: "/Bet/FacebookMessage",
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                data: formData,
+                success: function (data) {
+                    //console.log(data.host);
+                    //console.log(data.guid);
+                    var inviteUrl = data.host + 'Home/Invited/' + data.guid + '/' + data.action;
+                    console.log(inviteUrl);
+                    FB.ui({
+                        method: 'send',
+                        link: inviteUrl
+                    },
+                        function (response) {
+                            $("#fb-help").remove();
+                            $("#fb-help-bottom").remove();
+
+                            if (response && response.success) {
+                                console.log(response);
+                                //$("#removeFB .fields").hide();
+                                //$("#removeFB p").html("Your savings are on their way. Want to double your savings? Invite another friend!");
+                                //$("#removeFB .fields.center").show();
+                                //$("#removeFB fieldset").hide();
+                                //$(".createAccBtn").hide();
+                                
+                                $("#UlEmailsList").append("<li>Facebook friends</li>");
+                                $("#InvitedList").show();
+
+                                //$(".continueBtn").show();
+
+                                switchToMore();
+                            } else {
+                                console.log('canceled');
+                            }
+                        }
+                    );
+                    if(timeFBhelp) { clearTimeout(timeFBhelp); }
+                    timeFBhelp = setTimeout(function(){openFBhelp();}, 500);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        
+        function openFBhelp(){
+            var position = $(".fb_dialog").position();
+
+            //fix
+            if(firstFBhelp) {
+                var dialogs = $(".fb_dialog");
+                var dialog = dialogs[dialogs.length-1];
+                position = $(dialog).position();
+            }
+            
+            if(position.left > 0 && position.top > -10000) {
+                if(timeFBhelp) { clearTimeout(timeFBhelp); }
+                $("#fb-help").remove();
+                $("#fb-help-bottom").remove();
+                //$("body").append("<div id='fb-help'><p>You can invite as many Facebook friends as you like by sending them a private message, like: \"Hey, let's join the safe drivers family and cut our insurance costs!\"</p></div>");
+                //$("body").append("<div id='fb-help'><p>You can invite as many Facebook friends as you like by sending them a private message.</div>");
+                $("body").append("<div id='fb-help'><p>Pick a friend who knows you are a safe driver.</div>");
+                //$("body").append("<div id='fb-help-bottom'><p>Private message, like: \"Hey, let's join the safe drivers family and cut our insurance costs!\"</p></div>")
+                $("body").append("<div id='fb-help-bottom'><p>I am asking you to endorse me as a safe driver. Together we will save $" + (parseInt($("#price1").html()) + parseInt($("#price2").html())) + ".</p></div>")
+
+                if(!firstFBhelp) {
+                    position = $(".fb_dialog").position();
+                }
+                
+                var fbDialogleft = position.left + $(".fb_dialog").width() - 50;
+
+                $("#fb-help").css("left", fbDialogleft);
+                $("#fb-help").css("top", position.top - 65);
+
+                $("#fb-help-bottom").css("left", fbDialogleft);
+                $("#fb-help-bottom").css("top", position.top + 98);
+
+                firstFBhelp = true;
+            }
+            else {
+                if(timeFBhelp) { clearTimeout(timeFBhelp); }
+                console.log('timeFBhelp: ', timeFBhelp);
+                timeFBhelp = setTimeout(function(){openFBhelp();}, 500);
+            }
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: @System.Configuration.ConfigurationManager.AppSettings["FBconsumerKey"].ToString(),
+                xfbml: true,
+                version: 'v2.6'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        $("#invite-btn").click(function (e) {
+            e.preventDefault();
+            FB.getLoginStatus(function (response) {
+                // Check login status on load, and if the user is
+                // already logged in, go directly to the welcome message.
+                if (response.status == 'connected') {
+                    openFbSendDialog();
+                }
+                else {
+                    FB.login(function (response) {
+                        if (response.status == 'connected') {
+                            openFbSendDialog();
+                        }
+                    }, { scope: 'user_friends, email' });
+                }
+            });
+        });
+
+        $(".upArrow").click(function(){
+            $(".amo-btn").removeClass("active");
+            if(disableDown == 1)
+            {
+                disableDown = 0;
+            }
+
+            if(disableUp == 0) {
+                $(".items-list").animate({
+                    marginLeft: "+=" + voucherWidth
+                }, 500, function () {
+                    var badges = $(".valueBadge");
+                    badges.removeClass("active");
+                    badges.eq(activePriceIndex).addClass("active");
+                });
+
+                activePriceIndex--;
+
+                if(activePriceIndex == 0) {
+                    //$(this).css("cursor","auto");
+                    $(this).addClass("inactive");
+                    disableUp = 1;
+                }
+
+                $("#hfAmount").val($(".items-list .item").eq(activePriceIndex).attr("data-amountID"));
+                setValues($("#hfAmount").val());
+            }
+        });
+
+        $(".downArrow").click(function(){
+            $(".amo-btn").removeClass("active");
+            if(disableUp == 1)
+            {
+                disableUp = 0;
+            }
+
+            if(disableDown == 0){
+                $(".items-list").animate({
+                    marginLeft: "-=" + voucherWidth
+                }, 500, function () {
+                    var badges = $(".valueBadge");
+                    badges.removeClass("active");
+                    badges.eq(activePriceIndex).addClass("active");
+                });
+
+                activePriceIndex++;
+
+                if(activePriceIndex == $(".items-list .item").length -1) {
+                    //$(this).css("cursor","auto");
+                    $(this).addClass("inactive");
+                    disableDown = 1;
+                }
+
+                $("#hfAmount").val($(".items-list .item").eq(activePriceIndex).attr("data-amountID"));
+                setValues($("#hfAmount").val());
+            }
+        });
+
+
+        function setValues(value) {
+  
+            if (value == 65) {
+                $("#price1").html(50);
+                $("#price2").html(10);
+                $("#price3").html(5);
+                $("#price4").html(65);
+                $("#buttonPrice").html("Save $50");
+
+            } else if (value == 130)
+            {
+                $("#price1").html(100);
+                $("#price2").html(20);
+                $("#price3").html(10);
+                $("#price4").html(130);
+                $("#buttonPrice").html("Save $100");
+
+            } else if (value == 260)
+            {
+                $("#price1").html(200);
+                $("#price2").html(40);
+                $("#price3").html(20);
+                $("#price4").html(260);
+                $("#buttonPrice").html("Save $200");
+
+            } else {
+                $("#price1").html(500);
+                $("#price2").html(100);
+                $("#price3").html(50);
+                $("#price4").html(650);
+                $("#buttonPrice").html("Save $500");
+
+            }
+        }
+        
+        function AjaxPostCompleted() {
+            $("#InvitedList").show();
+            $('form').trigger("reset");
+        }
+
+        var m = (window.innerWidth <= 461);
+        if (m) {
+            shuffle();
+        }
+
+        function shuffle() {
+            $(".center.unselected").unbind("click");
+            $(".left.unselected").unbind("click");
+
+            $(".center.unselected").click(function () {
+                $(this).parent().find(".left.selected").addClass("unselected");
+                $(this).parent().find(".left.selected").removeClass("selected");
+                $(this).parent().find(".center.unselected").addClass("selected");
+                $(this).parent().find(".center.unselected").removeClass("unselected");
+                shuffle();
+            });
+            $(".left.unselected").click(function () {
+                $(this).parent().find(".left.unselected").addClass("selected");
+                $(this).parent().find(".left.unselected").removeClass("unselected");
+                $(this).parent().find(".center.selected").addClass("unselected");
+                $(this).parent().find(".center.selected").removeClass("selected");
+                shuffle();
+            });
+        }
+
+        $("#BtnAddEmail").click(function () {
+            switchToMore();
+        });
+
+        function switchToMore(){
+            var isVisible = $(".currentlySaved").is(":visible");
+            $(".moreHide").hide();
+            $(".currentlySaved").show();
+            $("#uploadPolicy").hide();
+            $(".formItem").eq(0).removeClass("done");
+            $(".description").eq(0).css("display", "none");
+            $(".iloBetPicker").css("margin-bottom", "0px");
+            $(".formItem").eq(0).find(".heading").html("Want to save more? Invite another friend.").css("text-align", "center");
+            $("h1").html("Great! You're about to save");
+
+            console.log($("#hfAmount").val());
+            var amount = $("#hfAmount").val();
+            if (amount == 65) {
+                value = parseInt($(".currentlySaved .badge b").html()) + 50;
+
+            } else if (amount == 130)
+            {
+                value = parseInt($(".currentlySaved .badge b").html()) + 100;
+
+            } else if (amount == 260)
+            {
+                value = parseInt($(".currentlySaved .badge b").html()) + 200;
+
+            } else {
+                value = parseInt($(".currentlySaved .badge b").html()) + 500;
+
+            }
+            
+            if(isVisible){
+                $(".currentlySaved .badge").fadeOut(800, function () {
+                    $(".currentlySaved .badge b").html(value);
+                    $(".currentlySaved .badge").fadeIn(800);
+                });
+            }
+            else {
+                $(".currentlySaved .badge b").html(value);
+
+            }
+
+            if(value > 99) $(".currentlySaved .verbal").html("(a beautiful dinner)");
+            if(value > 199) $(".currentlySaved .verbal").html("(a smartwatch)");
+            if(value > 299) $(".currentlySaved .verbal").html("(a new iPad)");
+            if(value > 499) $(".currentlySaved .verbal").html("(almost one new iPhone)");
+            if(value > 649) $(".currentlySaved .verbal").html("(a new iphone)");
+
+            $("html, body").animate({ scrollTop: "0px" });
+        }
+    </script>
+}

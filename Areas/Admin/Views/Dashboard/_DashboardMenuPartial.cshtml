@@ -1,0 +1,23 @@
+﻿  <div class="menubgr"></div>
+    <div class="menu">
+        <div class="badge-border">
+            <div class="badge-inner">
+            </div>
+        </div>
+@*        <div class="boxes">
+            <a class="box" href="@Url.Action("Support-Friends","Bet", new { area = "" })" title="Support your friends">
+                <span class="heading">SUPPORT OTHERS</span>
+                <div class="icon icon"></div>
+            </a>
+            <a class="box" href="@Url.Action("Support-Me","Bet", new { area = "" })" title="Get support from your friends">
+                <span class="heading">GET SUPPORT</span>
+                <div class="icon icon2"></div>
+            </a>
+        </div>*@
+        <div class="menuitems">
+            <a href="@Url.Action("Index","Dashboard")" class="menuitem @(@ViewBag.ActiveLink == 0 ? "active" : "") " title="Dashboard">Dashboard</a>
+            <a href="@Url.Action("BetList","Dashboard")" class="menuitem @(@ViewBag.ActiveLink == 1 ? "active" : "") " title="Bets">Bets</a>
+@*            <a href="@Url.Action("Bets","Dashboard")" class="menuitem @(@ViewBag.ActiveLink == 2 ? "active" : "") " title="Bets">Bets</a>*@
+            <a href="#" class="menuitem @(@ViewBag.ActiveLink == 3 ? "active" : "") " title="Log out">Log out</a>
+        </div>
+    </div>

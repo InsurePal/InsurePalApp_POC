@@ -1,0 +1,19 @@
+Mon Sep 19 14:16:19 2016 Warning: cryptapicert used, setting maximum TLS version to 1.1.
+Mon Sep 19 14:16:19 2016 OpenVPN 2.3.12 x86_64-w64-mingw32 [SSL (OpenSSL)] [LZO] [PKCS11] [IPv6] built on Aug 23 2016
+Mon Sep 19 14:16:19 2016 Windows version 6.2 (Windows 8 or greater) 64bit
+Mon Sep 19 14:16:19 2016 library versions: OpenSSL 1.0.1t  3 May 2016, LZO 2.09
+Enter Management Password:
+Mon Sep 19 14:16:19 2016 MANAGEMENT: TCP Socket listening on [AF_INET]127.0.0.1:25340
+Mon Sep 19 14:16:19 2016 Need hold release from management interface, waiting...
+Mon Sep 19 14:16:19 2016 MANAGEMENT: Client connected from [AF_INET]127.0.0.1:25340
+Mon Sep 19 14:16:19 2016 MANAGEMENT: CMD 'state on'
+Mon Sep 19 14:16:19 2016 MANAGEMENT: CMD 'log all on'
+Mon Sep 19 14:16:19 2016 MANAGEMENT: CMD 'hold off'
+Mon Sep 19 14:16:19 2016 MANAGEMENT: CMD 'hold release'
+Mon Sep 19 14:16:26 2016 MANAGEMENT: CMD 'username "Auth" "stritar"'
+Mon Sep 19 14:16:26 2016 MANAGEMENT: CMD 'password [...]'
+Mon Sep 19 14:16:26 2016 WARNING: No server certificate verification method has been enabled.  See http://openvpn.net/howto.html#mitm for more info.
+Mon Sep 19 14:16:26 2016 OpenSSL: error:C5065064:microsoft cryptoapi:CertFindCertificateInStore:Cannot find object or property.
+Mon Sep 19 14:16:26 2016 MANAGEMENT: Client disconnected
+Mon Sep 19 14:16:26 2016 Cannot load certificate "SUBJ:Httpool VPN" from Microsoft Certificate Store
+Mon Sep 19 14:16:26 2016 Exiting due to fatal error
